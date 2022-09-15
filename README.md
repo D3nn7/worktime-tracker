@@ -1,4 +1,4 @@
-# Practise-Project - Invoice Generator
+# Practise-Project - XXX
 In this repository is the source code and documentation of the practice project which we created in addition to our final exam.
 
 
