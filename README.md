@@ -1,4 +1,4 @@
-# Practise-Project - XXX
+# Practise-Project - TimeTrack
 In this repository is the source code and documentation of the practice project which we created in addition to our final exam.
 
 
