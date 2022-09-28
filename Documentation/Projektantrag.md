@@ -104,3 +104,7 @@ Teilhaber:
     Ein Tool zum kollaborativem designen, prototyping und planen des Projektes.
 - **Appwrite** (self hostet)
     Ein Backend-as-a-Service (BaaS) mit welchem die Benutzer Authentifizierung und das Speichern der Daten erfolgen soll.
+
+
+
+(Rechtschreibfehler vorbehalten)
