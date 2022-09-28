@@ -2,7 +2,7 @@
 (Stand 28.09.2022 11:17)
 
 ## Details
-Name: WorkTrime Tracker
+Name: WorkTime Tracker
 
 Teilhaber:
 - Danny Schapeit
