@@ -17,7 +17,7 @@ Teilhaber:
   </tr>
   <tr>
     <td>Ausgangslage</td>
-    <td>Es soll ein Tool entwickelt werden, mit dem die Arbeitszeit vom Benutzer.</td>
+    <td>Es soll ein Tool entwickelt werden, mit dem die Arbeitszeit vom Benutzer erfasst und verwaltet werden soll.</td>
   </tr>
   <tr>
     <td>Projektziele</td>
