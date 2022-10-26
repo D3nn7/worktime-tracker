@@ -56,9 +56,10 @@ Teilhaber:
     <tr>
     <td>Kosten</td>
     <td>
-- Server (15,00 € Monatlich)
+- Serverkostenfür einen V-Server 25,00 € (monatlich)
     - für Demo und Produktionssystem
     - für das Backend
+- 2 Subdomains 2,00 € (monatlich)
     </td>
   </tr>
   <tr>
