@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="./assets/images/worktime_tracker_logo_v1.png">
+</p>
+
 # Practise-Project - WorkTime Tracker
 In this repository is the source code and documentation of the practice project which we created in addition to our final exam.
 
