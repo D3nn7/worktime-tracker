@@ -1,0 +1,39 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+worktime-tracker-dev/node_modules
+worktime-tracker-dev/.pnp
+worktime-tracker-dev/.pnp.js
+
+# testing
+worktime-tracker-dev/coverage
+
+# next.js
+worktime-tracker-dev/.next/
+worktime-tracker-dev/out/
+
+# production
+worktime-tracker-dev/build
+
+# misc
+worktime-tracker-dev/.DS_Store
+worktime-tracker-dev/*.pem
+
+# debug
+worktime-tracker-dev/npm-debug.log*
+worktime-tracker-dev/yarn-debug.log*
+worktime-tracker-dev/yarn-error.log*
+worktime-tracker-dev/.pnpm-debug.log*
+
+# local env files
+worktime-tracker-dev/.env*.local
+
+# vercel
+worktime-tracker-dev/.vercel
+
+# typescript
+worktime-tracker-dev/*.tsbuildinfo
+worktime-tracker-dev/next-env.d.ts
+
+# npm
+worktime-tracker-dev/package-lock.json
