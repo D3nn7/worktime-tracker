@@ -1,23 +1,20 @@
-import { Account, Client, ID, Models } from 'appwrite';
-import { ApiResponse } from '../types/api';
+import { Client as Appwrite, Account } from 'appwrite';
+import { atom } from 'recoil';
+import { User } from '../types';
 
-const client = new Client()
-    .setEndpoint(`https://${process.env.APPWRITE_ENDPOINT}/v1`)
-    .setProject(process.env.APPWRITE_PROJECT as string)
+export const Server = {
+    endpoint: process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT as string,
+    project: process.env.NEXT_PUBLIC_APPWRITE_PROJECT as string,
+};
 
-const account = new Account(client)
+export const client = new Appwrite()
+    .setEndpoint(Server.endpoint)
+    .setProject(Server.project);
+const account = new Account(client);
 
+export const appwrite = { account };
 
-export async function createUser(email: string, password: string): Promise<ApiResponse> {
-    const promise = account.create(ID.unique(), email, password);
-
-    const result: ApiResponse = await promise.then(function (response: Models.Account<Models.Preferences>) {
-        return { status: 200, message: "User created", data: response};
-    }, function (error: string) {
-        return { status: 500, message: "Backend Server Error", data: error };
-    });
-
-    return result;
-}
-
-
+export const userState = atom<User>({
+    key: "user",
+    default: null as unknown as User,
+});

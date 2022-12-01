@@ -22,7 +22,6 @@ export default function Register() {
       const response = await fetch(endpoint, options)
   
       const result = await response.json()
-      alert(`Is this your full name: ${result.data}`)
     }
     return (
       <form onSubmit={handleSubmit}>
