@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./assets/images/worktime_tracker_logo_v1.png">
+    <img src="./assets/images/worktime_tracker_logo_v2.png">
 </p>
 
 # Practise-Project - WorkTime Tracker
