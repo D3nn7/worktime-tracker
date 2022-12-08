@@ -3,6 +3,8 @@
 </p>
 
 # Practise-Project - WorkTime Tracker
+[![Mockup on Figma](https://img.shields.io/badge/figma-00BFA6.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/yIDNNqVKf3ZsPVhcQlt7zs/Mockup?node-id=13%3A36&t=1X1YYeWbqentNecJ-0)
+
 In this repository is the source code and documentation of the practice project which we created in addition to our final exam.
 
 
