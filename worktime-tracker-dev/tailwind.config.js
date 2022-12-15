@@ -12,6 +12,9 @@ module.exports = {
         'bg-base': '#171717',
         'color-reg-now': '#00BFA6',
       },
+	  width: {
+		'account-input':'360px'
+    },
     }
   },
   plugins: [],
