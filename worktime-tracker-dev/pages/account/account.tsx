@@ -1,11 +1,11 @@
-import Register from '../../components/account/register'
-import Login from '../../components/account/login'
-import Verify from '../../components/account/verify'
-import ResetPassword from '../../components/account/resetPassword'
+import Register from '../../components/account/Register'
+import Login from '../../components/account/Login'
+import Verify from '../../components/account/Verify'
+import ResetPassword from '../../components/account/ResetPassword'
 import { useState } from 'react'
 
 export default function AccountDefault() {
-    const [account, setAccount] = useState<string>("resetPassword")
+    const [account, setAccount] = useState<string>("verify")
     const checkAccount = () : JSX.Element => {	
         switch (account) {
             case 'login':
@@ -26,7 +26,7 @@ export default function AccountDefault() {
                 )
             default:
                 return (
-                    <div>register</div>
+                    <div>not found</div>
                 )
         }
     }

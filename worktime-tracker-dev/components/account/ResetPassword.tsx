@@ -1,5 +1,5 @@
 import { useState } from "react"
-import AccountInput from "./input"
+import AccountInput from "./Input"
 
 export default function resetPassword() {
     const [inputValue, setInputValue] = useState<string>("");
