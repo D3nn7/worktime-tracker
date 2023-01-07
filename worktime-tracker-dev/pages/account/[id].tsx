@@ -2,12 +2,13 @@ import Register from "../../components/account/Register";
 import Login from "../../components/account/Login";
 import Verify from "../../components/account/Verify";
 import ResetPassword from "../../components/account/ResetPassword";
-import { useState } from "react";
+import { NextRequest } from "next/server";
+import { useRouter } from "next/router";
 
-export default function AccountDefault() {
-    const [account, setAccount] = useState<string>("verify");
+export default function AccountDefault(req: NextRequest) {
+    const router = useRouter();
     const checkAccount = (): JSX.Element => {
-        switch (account) {
+        switch (router.query.id) {
             case "login":
                 return <Login />;
             case "register":
@@ -17,12 +18,12 @@ export default function AccountDefault() {
             case "resetPassword":
                 return <ResetPassword />;
             default:
-                return <div>not found</div>;
+                return <div>register</div>;
         }
     };
 
     return (
-        <div className="bg-gradient-to-b from-bg-from to-bg-to w-screen h-screen">
+        <div className="bg-gradient-to-b from-cyan-base to-green-base w-screen h-screen">
             <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
                 <div className="flex flex-row">
                     <div className="flex-initial mr-3">
