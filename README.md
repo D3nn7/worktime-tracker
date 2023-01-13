@@ -17,3 +17,4 @@ Authors
 
 ## [Documentation](./documentation/) (only in german)
 - [Projektantrag](./documentation/Projektantrag.md)
+- [ ] Add installation guide
