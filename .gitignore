@@ -38,3 +38,4 @@ worktime-tracker-dev/next-env.d.ts
 # npm
 worktime-tracker-dev/package-lock.json
 worktime-tracker-dev/.env
+worktime-tracker-dev/next.config.js
