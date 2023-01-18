@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Register() {
     const [password, setPassword] = useState<string>("");
@@ -29,10 +30,13 @@ export default function Register() {
             </div>
             <div>
                 <span className="text-md">
-                    Already have an account?{" "}
-                    <a href="" className="text-color-reg-now">
+                    Already have an account?&nbsp;
+                    <Link
+                        href={{ pathname: "./login" }}
+                        className="text-color-reg-now"
+                    >
                         Login here
-                    </a>
+                    </Link>
                     .
                 </span>
             </div>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function login() {
     return (
         <>
@@ -6,11 +8,14 @@ export default function login() {
             </div>
             <div>
                 <span className="text-md">
-                    Dont have an Account yet?{" "}
-                    <a href="" className="text-color-reg-now">
+                    Dont have an Account yet?&nbsp;
+                    <Link
+                        href={{ pathname: "./register" }}
+                        className="text-color-reg-now"
+                    >
                         Register here
-                    </a>{" "}
-                    for free!
+                    </Link>
+                    &nbsp;for free!
                 </span>
             </div>
             <form action="">
