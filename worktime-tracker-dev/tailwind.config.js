@@ -12,6 +12,7 @@ module.exports = {
                 "bg-base": "#171717",
                 "color-reg-now": "#00BFA6",
                 "account-input": "#262626",
+                "orange-base": "#FDC685",
             },
             width: {
                 "account-input": "360px",
