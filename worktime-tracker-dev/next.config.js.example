@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
+    PROJECT_URL: "http://localhost:3000",
     APPWRITE_ENDPOINT: "https://appwrite-backend.com/v1",
     APPWRITE_PROJECT: "projectId",
     APPWRITE_COLLECTION_ID: "collectionId",

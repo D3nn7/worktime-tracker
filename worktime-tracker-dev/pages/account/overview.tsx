@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import ChangePassword from "../../components/account/changePassword";
 import Page from "../../components/page/page";
 import { appwrite, userState } from "../../store/global";
 
@@ -17,7 +18,7 @@ const Secure = () => {
         }
         const fetchData = async () => {
             if (user !== undefined) {
-                setUserProfilePicture(appwrite.avatars.getInitials(user?.name as string, 200, 200));
+                setUserProfilePicture(appwrite.avatars.getInitials(user?.name, 200, 200));
             }
         }
         fetchData();
@@ -33,6 +34,10 @@ const Secure = () => {
                         <br />Created at <b>{user?.registration}</b>
                     </div>
                     <Image src={userProfilePicture?.href as unknown as string} alt={"Profile picture"} width={200} height={200} />
+                    <div>
+                        <b className="color:red">Danger Zone</b>
+                        <ChangePassword />
+                    </div>
                 </div>
             </section>
         </Page>

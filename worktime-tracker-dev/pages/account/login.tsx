@@ -3,8 +3,7 @@ import { useState } from "react";
 import type { FormEvent } from "react"
 import Alert from "../../components/page/alert";
 import { useRouter } from "next/router";
-import { appwrite, userState } from "../../store/global";
-import { useRecoilValue } from "recoil";
+import { appwrite } from "../../store/global";
 import Page from "../../components/page/page";
 
 const Login = () => {
@@ -63,6 +62,7 @@ const Login = () => {
                             </button>
                         </div>
                     </form>
+                    <p>Forgot password? <Link href={'./reset'}>reset here</Link>.</p>
                 </div>
             </section>
         </Page>

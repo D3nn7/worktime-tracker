@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import Alert from "../../components/page/alert";
 import Page from "../../components/page/page"
 import { appwrite, userState } from "../../store/global";
+import { AppwriteErrorType } from "../../utils/appwriteResponse";
 
 export default function Verify({ userId, secret} : { userId?: string, secret?: string }) {
 	const [user] = useRecoilState(userState);
@@ -24,7 +25,7 @@ export default function Verify({ userId, secret} : { userId?: string, secret?: s
 					if (error instanceof AppwriteException) {
 						if(error.type === "user_invalid_token") {
 							setAlert("The token you using to verify your account is not valid.");
-						} else if (error.type === "general_rate_limit_exceeded") {
+						} else if (error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED) {
 							setAlert("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
 						}
 					} else {
@@ -37,7 +38,7 @@ export default function Verify({ userId, secret} : { userId?: string, secret?: s
 	});
 
 	const sendVerification = async () => {
-		await appwrite.account.createVerification("http://localhost:3000/account/verify");
+		await appwrite.account.createVerification(process.env.PROJECT_URL + "/account/verify");
 	};
 
 	if(!user?.emailVerification) {
