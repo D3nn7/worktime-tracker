@@ -1,4 +1,4 @@
-import NavBar from "../components/navigation/navBarProductPage";
+import NavBar from "../components/navigation/NavBarProductPage";
 
 export default function productPage() {
     return (

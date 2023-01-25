@@ -1,4 +1,4 @@
-import NavBar from "../components/navigation/navBarTracking";
+import NavBar from "../components/navigation/NavBarTracking";
 
 export default function Index() {
     return (

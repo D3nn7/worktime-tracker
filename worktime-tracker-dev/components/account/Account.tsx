@@ -1,4 +1,4 @@
-import NavBar from "../navigation/navBarTracking";
+import NavBar from "../navigation/NavBarTracking";
 import Input from "./Input";
 
 export default function Account() {
@@ -52,6 +52,14 @@ export default function Account() {
                             </form>
                         </div>
                         <hr className="fill-[#303030]" />
+                        <div className="pt-10 flex-row">
+                            <button className="py-2.5 px-5 bg-orange-base rounded-lg text-bg-base mr-5">
+                                Change password
+                            </button>
+                            <button className="py-2.5 px-5 rounded-lg text-bg-base bg-[#FD8180]">
+                                Change password
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
