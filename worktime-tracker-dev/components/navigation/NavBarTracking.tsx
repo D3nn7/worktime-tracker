@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../assets/WorkTimeTrackerLogo.svg";
+import Logo from "../../assets/Logo.svg";
 import { useRouter } from "next/router";
 
 export default function NavBar() {
@@ -19,11 +19,8 @@ export default function NavBar() {
     return (
         <nav className="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 ">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
-                <Link href={"/"} className="flex items-center">
-                    <Image src={Logo} className="h-6 mr-3 sm:h-9" alt="Logo" />
-                    <span className="self-center text-xl font-semibold whitespace-nowrap ">
-                        Worktime Tracker
-                    </span>
+                <Link href={"/"}>
+                    <Image src={Logo} className="h-11 w-auto" alt="Logo" />
                 </Link>
                 <div className="flex md:order-2">
                     <button
