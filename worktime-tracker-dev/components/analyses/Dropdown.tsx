@@ -1,10 +1,10 @@
-import { ReactHTMLElement, useState } from "react";
+import { useState } from "react";
 
 export default function Dropdown() {
     const [selection, setSelection] = useState<string>("Daily");
 
     const toggleDropdown = () => {
-        const dropdown = document.getElementById("dropdown")!;
+        const dropdown = document.getElementById("idTimeBoxDropdown")!;
         dropdown.classList.toggle("hidden");
     };
 
@@ -40,7 +40,7 @@ export default function Dropdown() {
                 </svg>
             </button>
             <div
-                id="dropdown"
+                id="idTimeBoxDropdown"
                 className="z-10 absolute hidden bg-[#303030] border-[#454545] border-2 divide-y divide-gray-100 rounded-lg shadow w-44 mt-2"
             >
                 <ul
