@@ -18,6 +18,9 @@ module.exports = {
             width: {
                 "account-input": "360px",
             },
+            spacing: {
+                92: "379px",
+            },
         },
     },
     plugins: [require("flowbite/plugin")],
