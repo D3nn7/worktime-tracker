@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useResetRecoilState } from "recoil";
 import { appwrite, userState } from "../../store/global";
-import { User } from "../../store/types";
 
 export default function Header({ isUserLoggedIn }: { isUserLoggedIn: boolean }) {
     const router = useRouter();

@@ -5,7 +5,6 @@ import { FormEvent, useEffect, useState } from "react";
 import Alert from "../../components/page/alert";
 import Page from "../../components/page/page"
 import { appwrite } from "../../store/global";
-import { AppwriteErrorType } from "../../utils/appwriteResponse";
 
 export default function Reset({ userId, secret, expire } : { userId?: string, secret?: string, expire?: string }) {
     const [alert, setAlert] = useState("");

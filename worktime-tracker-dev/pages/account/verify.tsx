@@ -12,45 +12,60 @@ export default function Verify({ userId, secret} : { userId?: string, secret?: s
 	const [user] = useRecoilState(userState);
 	const [verified, setVerified] = useState(false);
 	const [alert, setAlert] = useState("");
+	const [verificationSend, setVerificationSend] = useState(false);
 
 	const router = useRouter();
 
 	useEffect(() => {
 		if (userId && secret && !verified) {
-			const verifyAccount = async () => {
-				try {
-					await appwrite.account.updateVerification(userId, secret);
-					setVerified(true);
-				} catch(error: any) {
-					if (error instanceof AppwriteException) {
-						if(error.type === "user_invalid_token") {
-							setAlert("The token you using to verify your account is not valid.");
-						} else if (error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED) {
-							setAlert("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
-						}
-					} else {
-						setAlert("Something wrent wrong...");
-					}
-				}
-			};
 			verifyAccount();
 		}
 	});
 
+	const verifyAccount = async () => {
+		try {
+			await appwrite.account.updateVerification(userId as string, secret as string);
+			setVerified(true);
+		} catch(error: any) {
+			if (error instanceof AppwriteException) {
+				if(error.type === "user_invalid_token") {
+					setAlert("The token you using to verify your account is not valid.");
+				} else if (error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED) {
+					setAlert("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
+				}
+			} else {
+				setAlert("Something wrent wrong...");
+			}
+		}
+	};
+
 	const sendVerification = async () => {
 		await appwrite.account.createVerification(process.env.PROJECT_URL + "/account/verify");
+		setVerificationSend(true);
+
 	};
 
 	if(!user?.emailVerification) {
-		return (
-			<Page isSecurePage={true}>
-				{alert && <Alert message={alert} />}
-				<h1>One step ahead to track you times.</h1>
-				<p>To use you account, you need to verify you email adress first.</p>
-				<p>Would you like to send a verification email to <b>{user?.email}</b>?</p>
-				<button onClick={sendVerification}>Send Verification Email</button>
-			</Page>
-		);
+		if (!verificationSend) {
+			return (
+				<Page isSecurePage={true}>
+					{alert && <Alert message={alert} />}
+					<h1>One step ahead to track you times.</h1>
+					<p>To use you account, you need to verify you email adress first.</p>
+					<p>Would you like to send a verification email to <b>{user?.email}</b>?</p>
+					<button onClick={sendVerification}>Send Verification Email</button>
+				</Page>
+			);
+		} else {
+			return (
+				<Page isSecurePage={true}>
+					{alert && <Alert message={alert} />}
+					<h1>Verification sent</h1>
+					<p>We sent a verification mail to <b>{user?.email}</b>.</p>
+					<p>Please check you inbox and click the link in the mail we sent you.</p>
+				</Page>
+			);
+		}
 	} else if(verified) {
 		return (
 			<Page isSecurePage={true}>
