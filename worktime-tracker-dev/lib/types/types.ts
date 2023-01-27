@@ -7,3 +7,7 @@ export interface ITimeBoxProps {
 export interface ICategoryBoxProps {
     average: string;
 }
+
+export interface IAccountDropdownProps {
+    navigation: string;
+}
