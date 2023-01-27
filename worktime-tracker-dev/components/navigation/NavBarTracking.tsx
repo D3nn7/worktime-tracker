@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/Logo.svg";
 import { useRouter } from "next/router";
+import AccountDropdown from "./AccountDropdown";
 
 export default function NavBar() {
     const router = useRouter();
@@ -18,17 +19,12 @@ export default function NavBar() {
 
     return (
         <nav className="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 ">
-            <div className="container flex flex-wrap items-center justify-between mx-auto">
+            <div className="container flex  items-center justify-between mx-auto">
                 <Link href={"/"}>
                     <Image src={Logo} className="h-11 w-auto" alt="Logo" />
                 </Link>
                 <div className="flex md:order-2">
-                    <button
-                        type="button"
-                        className="bg-orange-base hover:bg-orange-300 text-black focus:ring-4 focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
-                    >
-                        <Link href={{ pathname: navAccount }}>JB</Link>
-                    </button>
+                    <AccountDropdown navigation={navAccount} />
                     <button
                         data-collapse-toggle="navbar-sticky"
                         type="button"
