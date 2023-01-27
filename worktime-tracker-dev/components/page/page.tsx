@@ -10,8 +10,8 @@ import Loading from "./loading";
 
 export default function Page({ isSecurePage = false, headerEnabled = true, isLoading = false, isBlacklistedWhenLoggedIn = false, children } : { isSecurePage?: boolean, headerEnabled?: boolean, isLoading?: boolean, isBlacklistedWhenLoggedIn?: boolean, children: React.ReactNode }) {
     
-    const [user, setUser] = useRecoilState(userState);
-    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useRecoilState<User>(userState);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const router = useRouter();
 

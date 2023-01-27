@@ -7,13 +7,13 @@ import { appwrite } from "../../store/global";
 import Page from "../../components/page/page";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [alert, setAlert] = useState("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [alert, setAlert] = useState<string>("");
     const router = useRouter();
 
-    const login = async (e: FormEvent<EventTarget>) => {
-        e.preventDefault();
+    const login = async (event: FormEvent<EventTarget>) => {
+        event.preventDefault();
         try {
             await appwrite.account.createEmailSession(email, password);
             router.push("/account/overview");

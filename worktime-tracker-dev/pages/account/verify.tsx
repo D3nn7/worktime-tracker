@@ -6,13 +6,14 @@ import { useRecoilState } from "recoil";
 import Alert from "../../components/page/alert";
 import Page from "../../components/page/page"
 import { appwrite, userState } from "../../store/global";
+import { User } from "../../store/types";
 import { AppwriteErrorType } from "../../utils/appwriteResponse";
 
 export default function Verify({ userId, secret} : { userId?: string, secret?: string }) {
-	const [user] = useRecoilState(userState);
-	const [verified, setVerified] = useState(false);
-	const [alert, setAlert] = useState("");
-	const [verificationSend, setVerificationSend] = useState(false);
+	const [user] = useRecoilState<User>(userState);
+	const [verified, setVerified] = useState<boolean>(false);
+	const [alert, setAlert] = useState<string>("");
+	const [verificationSend, setVerificationSend] = useState<boolean>(false);
 
 	const router = useRouter();
 

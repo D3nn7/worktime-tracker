@@ -3,12 +3,12 @@ import { appwrite } from "../../store/global";
 
 export default function ChangePassword() {
 
-    const [currentPassword, setCurrentPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [retypedNewPassword, setRetypedNewPassword] = useState("");
+    const [currentPassword, setCurrentPassword] = useState<string>("");
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [retypedNewPassword, setRetypedNewPassword] = useState<string>("");
 
-    const changePassword = async (e: FormEvent<EventTarget>) => {
-        e.preventDefault();
+    const changePassword = async (event: FormEvent<EventTarget>) => {
+        event.preventDefault();
         try {
             const result = await appwrite.account.updatePassword(newPassword, currentPassword);
             console.log(result);

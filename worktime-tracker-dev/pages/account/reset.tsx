@@ -7,17 +7,16 @@ import Page from "../../components/page/page"
 import { appwrite } from "../../store/global";
 
 export default function Reset({ userId, secret, expire } : { userId?: string, secret?: string, expire?: string }) {
-    const [alert, setAlert] = useState("");
-    const [email, setEmail] = useState("");
-
-    const [password, setPassword] = useState("");
-    const [passwordRepeat, setPasswordRepeat] = useState("");
-
-    const [resetProcess, setResetProcess] = useState(false);
+    const [alert, setAlert] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [passwordRepeat, setPasswordRepeat] = useState<string>("");
+    const [resetProcess, setResetProcess] = useState<boolean>(false);
+    
     const router = useRouter();
 
-    const resetPassword = async (e: FormEvent<EventTarget>) => {
-        e.preventDefault();
+    const resetPassword = async (event: FormEvent<EventTarget>) => {
+        event.preventDefault();
         try {
             await appwrite.account.createRecovery(email, process.env.PROJECT_URL + "/account/reset");
             setAlert("Email was send to " + email + ". Please check your inbox and follow the instructions.")
@@ -26,8 +25,8 @@ export default function Reset({ userId, secret, expire } : { userId?: string, se
         }
     }
 
-    const changePassword = async (e: FormEvent<EventTarget>) => {
-        e.preventDefault();
+    const changePassword = async (event: FormEvent<EventTarget>) => {
+        event.preventDefault();
         try {
             await appwrite.account.updateRecovery(userId as string, secret as string, password, passwordRepeat);
             setAlert("Password was changed. You can now login with your new password.");

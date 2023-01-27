@@ -3,20 +3,20 @@ import Link from 'next/link'
 import { useRouter } from "next/router";
 import Alert from "../../components/page/alert";
 import { appwrite, userState } from "../../store/global";
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { User } from '../../store/types';
 import Page from "../../components/page/page";
 
 const Register = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [alert, setAlert] = useState("");
-    const [ , setUser] = useRecoilState(userState);
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [alert, setAlert] = useState<string>("");
+    const setUser = useSetRecoilState(userState);
     const router = useRouter();
 
-    const register = async (e: FormEvent<EventTarget>) => {
-        e.preventDefault();
+    const register = async (event: FormEvent<EventTarget>) => {
+        event.preventDefault();
         try {
             await appwrite.account.create('unique()', email, password, name);
             setUser(await appwrite.account.createEmailSession(email, password) as unknown as User);
