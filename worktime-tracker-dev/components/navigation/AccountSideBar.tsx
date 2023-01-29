@@ -1,0 +1,68 @@
+import { IAccountDropdownProps as Props } from "../../lib/types/types";
+import { FlowbiteSidebarTheme, Sidebar } from "flowbite-react";
+import { useState } from "react";
+import Link from "next/link";
+
+export default function AccountDropdown(props: Props) {
+    const [showSidebar, setShowSidebar] = useState(false);
+
+    return (
+        <>
+            {showSidebar && (
+                <button
+                    className="flex text-4xl text-white items-center cursor-pointer fixed right-10 top-6 z-50"
+                    onClick={() => setShowSidebar(!showSidebar)}
+                >
+                    x
+                </button>
+            )}
+            <button
+                onClick={() => setShowSidebar(!showSidebar)}
+                className="bg-orange-base  hover:bg-orange-300 text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
+            >
+                JB
+            </button>
+            <div
+                className={`top-0 right-0 w-96 bg-[#303030] p-10 fixed h-full z-40  ease-in-out duration-300 ${
+                    showSidebar ? "translate-x-0 " : "translate-x-full"
+                }`}
+            >
+                <ul className="py-2 text-lg mt-5">
+                    <li>
+                        <div className="block px-4 py-2 rounded-md ">
+                            <div className="flex flex-col mb-3">
+                                <span>Signed in as</span>
+                                <span>jonasbott2@web.de</span>
+                            </div>
+                            <hr />
+                        </div>
+                    </li>
+                    <li>
+                        <Link
+                            href={"/account/account"}
+                            className="block px-4 py-2 hover:bg-[#404040] rounded-md"
+                        >
+                            Account Settings
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={"/"}
+                            className="block px-4 py-2 hover:bg-[#404040] rounded-md"
+                        >
+                            Support
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={"/"}
+                            className="block px-4 py-2 hover:bg-[#404040] rounded-md"
+                        >
+                            Sign out
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+        </>
+    );
+}

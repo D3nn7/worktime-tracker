@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/Logo.svg";
 import { useRouter } from "next/router";
-import AccountDropdown from "./AccountDropdown";
+import AccountSideBar from "./AccountSideBar";
 
 export default function NavBar() {
     const router = useRouter();
@@ -24,7 +24,7 @@ export default function NavBar() {
                     <Image src={Logo} className="h-11 w-auto" alt="Logo" />
                 </Link>
                 <div className="flex md:order-2">
-                    <AccountDropdown navigation={navAccount} />
+                    <AccountSideBar navigation={navAccount} />
                     <button
                         data-collapse-toggle="navbar-sticky"
                         type="button"
