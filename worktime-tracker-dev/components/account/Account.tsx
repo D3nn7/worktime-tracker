@@ -1,5 +1,5 @@
 import NavBar from "../navigation/NavBarTracking";
-import Input from "./Input";
+import Link from "next/link";
 
 export default function Account() {
     return (
@@ -54,10 +54,12 @@ export default function Account() {
                         <hr className="fill-[#303030]" />
                         <div className="pt-10 flex-row">
                             <button className="py-2.5 px-5 bg-orange-base rounded-lg text-bg-base mr-5">
-                                Change password
+                                <Link href="/account/resetPassword">
+                                    Change password
+                                </Link>
                             </button>
-                            <button className="py-2.5 px-5 rounded-lg text-bg-base bg-[#FD8180]">
-                                Change password
+                            <button className="py-2.5 px-5 w-[170px] rounded-lg text-bg-base bg-[#FD8180]">
+                                Delete account
                             </button>
                         </div>
                     </div>
