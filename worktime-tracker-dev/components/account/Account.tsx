@@ -3,9 +3,9 @@ import Input from "./Input";
 
 export default function Account() {
     return (
-        <>
+        <div className="h-screen w-screen">
             <NavBar />
-            <div className="pl-40 pt-40 pr-20">
+            <div className="pl-40 pt-40 pr-20 mx-auto container">
                 <div className="flex flex-row">
                     <div className="flex-initial mr-10">
                         <button
@@ -63,6 +63,6 @@ export default function Account() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
