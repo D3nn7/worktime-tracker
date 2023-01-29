@@ -10,7 +10,7 @@ export default function Account() {
                     <div className="flex-initial mr-10">
                         <button
                             type="button"
-                            className="bg-orange-base hover:bg-orange-300 text-bg-base text-5xl focus:ring-4 focus:outline-none focus:border-spacing-0 rounded-lg p-6 text-center mr-3 md:mr-0"
+                            className="bg-orange-base hover:bg-orange-300 text-bg-base text-5xl rounded-lg p-6 text-center mr-3 md:mr-0"
                         >
                             JB
                         </button>
