@@ -5,6 +5,8 @@ import ResetPassword from "../../components/account/ResetPassword";
 import { NextRequest } from "next/server";
 import { useRouter } from "next/router";
 import Account from "../../components/account/Account";
+import Image from "next/image";
+import Logo from "../../assets/Logo.svg";
 
 export default function AccountDefault(req: NextRequest) {
     const router = useRouter();
@@ -39,7 +41,7 @@ export default function AccountDefault(req: NextRequest) {
                     <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
                         <div className="flex flex-row">
                             <div className="flex-initial mr-3">
-                                <h1 className="text-xl">Logo</h1>
+                                <Image src={Logo} alt="Logo" width={30} />
                             </div>
                             <div className="flex-initial">
                                 <h1 className="text-2xl">Worktime Tracker</h1>
