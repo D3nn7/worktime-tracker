@@ -1,5 +1,4 @@
 import { IAccountDropdownProps as Props } from "../../lib/types/types";
-import { FlowbiteSidebarTheme, Sidebar } from "flowbite-react";
 import { useState } from "react";
 import Link from "next/link";
 
