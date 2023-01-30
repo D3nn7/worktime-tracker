@@ -4,17 +4,6 @@ import Link from "next/link";
 export default function Register() {
     const [password, setPassword] = useState<string>("");
 
-    const checkPassword = (): boolean => {
-        const passwordInput = document.getElementById(
-            "reenteredPassword"
-        ) as HTMLInputElement;
-        if (passwordInput.value === password) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
     return (
         <>
             <div className="pt-10">
