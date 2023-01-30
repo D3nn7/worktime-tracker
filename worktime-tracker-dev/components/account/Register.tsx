@@ -4,14 +4,6 @@ import Link from "next/link";
 export default function Register() {
     const [password, setPassword] = useState<string>("");
 
-    const handleSubmit = (): void => {
-        if (checkPassword()) {
-            console.log("passwords match");
-        } else {
-            alert("passwords do not match");
-        }
-    };
-
     const checkPassword = (): boolean => {
         const passwordInput = document.getElementById(
             "reenteredPassword"
