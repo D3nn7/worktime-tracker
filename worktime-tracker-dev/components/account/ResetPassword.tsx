@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AccountInput from "./Input";
 
-export default function resetPassword() {
+export default function ResetPassword() {
     const [inputValue, setInputValue] = useState<string>("");
 
     const getEmailResetForm = (): JSX.Element => {
