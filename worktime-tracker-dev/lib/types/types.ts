@@ -4,10 +4,15 @@ export interface ITimeBoxProps {
     style?: string;
 }
 
-export interface ICategoryBoxProps {
+export interface IAnalysesCategoryBoxProps {
     average: string;
 }
 
 export interface IAccountDropdownProps {
     navigation: string;
+}
+
+export interface IAccountCategoryBoxProps {
+    category: string;
+    description: string;
 }
