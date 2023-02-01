@@ -7,7 +7,7 @@ import Logo from "../../assets/WorkTimeTrackerLogo.svg";
 
 export default function NavBar() {
     return (
-        <nav className="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 ">
+        <nav className="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 bg-bg-base ">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <Link href={"/"} className="flex items-center">
                     <Image src={Logo} className="h-6 mr-3 sm:h-9" alt="Logo" />
