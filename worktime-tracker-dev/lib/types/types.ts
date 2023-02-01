@@ -16,3 +16,10 @@ export interface IAccountCategoryBoxProps {
     category: string;
     description: string;
 }
+
+export interface ITimeCardProps {
+    description: string;
+    category: string;
+    time: string;
+    hexColor: string;
+}
