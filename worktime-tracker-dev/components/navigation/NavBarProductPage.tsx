@@ -10,7 +10,12 @@ export default function NavBar() {
         <nav className="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 bg-bg-base ">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <Link href={"/"} className="flex items-center">
-                    <Image src={Logo} className="h-6 mr-3 sm:h-9" alt="Logo" />
+                    <Image
+                        src={Logo}
+                        className="h-6 mr-3 sm:h-9"
+                        alt="Logo"
+                        priority
+                    />
                     <span className="self-center text-xl font-semibold whitespace-nowrap ">
                         Worktime Tracker
                     </span>
