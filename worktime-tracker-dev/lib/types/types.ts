@@ -23,3 +23,7 @@ export interface ITimeCardProps {
     time: string;
     hexColor: string;
 }
+
+export interface IFeatureProps {
+    feature: string;
+}

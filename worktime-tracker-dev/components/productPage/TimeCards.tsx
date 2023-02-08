@@ -10,7 +10,7 @@ export default function TimeCards(props: Props) {
                 <span className="flex">
                     <div
                         style={{ backgroundColor: `${props.hexColor}` }}
-                        className={`text-sm py-0.5 px-1 rounded-xl flex flex-row place-items-center space-x-1`}
+                        className={`text-sm py-0.5 px-1 rounded-xl flex flex-row place-items-center space-x-1 flex-wrap`}
                     >
                         <Icon path={mdiCircle} size={0.5} />
                         <span>{props.category}</span>
