@@ -2,6 +2,7 @@ import NavBar from "../components/navigation/NavBarTracking";
 import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
 import CategoryBox from "../components/categories/CategoryBox";
+import CategoryNoEntryBox from "../components/categories/CategoryNoEntryBox";
 
 export default function Categories() {
     const categories = [
@@ -11,9 +12,9 @@ export default function Categories() {
     ];
 
     return (
-        <div className="bg-bg-base h-screen w-screen">
+        <div className="bg-bg-base min-h-screen w-screen">
             <NavBar />
-            <div className="container mx-auto pt-40">
+            <div className="container mx-auto pt-40 pb-20">
                 <div className="pb-20 ">
                     <div className="text-3xl float-left">Categories</div>
                     <div className="float-right">
@@ -28,12 +29,17 @@ export default function Categories() {
                     </div>
                 </div>
                 <div className="mt-10 flex flex-col space-y-8">
-                    {categories.map((category) => (
+                    {categories.map((category, index) => (
                         <CategoryBox
+                            key={index}
                             category={category.category}
                             description={category.description}
                         />
                     ))}
+                    <CategoryNoEntryBox
+                        category="Something missing?"
+                        description="add more categories to manage the tiimes more accurately"
+                    />
                 </div>
             </div>
         </div>
