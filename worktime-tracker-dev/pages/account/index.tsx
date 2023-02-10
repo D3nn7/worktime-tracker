@@ -6,7 +6,7 @@ import Page from "../../components/page/page";
 import { appwrite, userState } from "../../store/global";
 
 
-const Secure = () => {
+const AccountOverview = () => {
     const [user] = useRecoilState(userState);
     const [userProfilePicture, setUserProfilePicture] = useState<URL | undefined>(undefined);
     const [loading, setLoading] = useState(true);
@@ -44,4 +44,4 @@ const Secure = () => {
     );
 };
 
-export default Secure;
+export default AccountOverview;

@@ -2,11 +2,11 @@ import { AppwriteException } from "appwrite";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
-import Alert from "../../components/page/alert";
-import Page from "../../components/page/page"
+import Alert from "../page/alert";
+import Page from "../page/page"
 import { appwrite } from "../../store/global";
 
-export default function Reset({ userId, secret, expire } : { userId?: string, secret?: string, expire?: string }) {
+export default function ResetUser({ userId, secret, expire } : { userId?: string, secret?: string, expire?: string }) {
     const [alert, setAlert] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");

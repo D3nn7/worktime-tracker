@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 
 const Alert = ({ message }: { message: string }) => {
   const [showAlert, setShowAlert] = useState(true);
-  const TIMEOUT = 3000;
-
+  
   useEffect(() => {
-    let timeout = setTimeout(() => setShowAlert(false), TIMEOUT);
+    let timeout = setTimeout(() => setShowAlert(false), 3000);
     return () => {
       clearTimeout(timeout);
     };

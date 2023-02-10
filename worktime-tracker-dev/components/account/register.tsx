@@ -1,11 +1,11 @@
 import { FormEvent, useState } from "react";
 import Link from 'next/link'
 import { useRouter } from "next/router";
-import Alert from "../../components/page/alert";
+import Alert from "../page/alert";
 import { appwrite, userState } from "../../store/global";
 import { useSetRecoilState } from 'recoil';
 import { User } from '../../store/types';
-import Page from "../../components/page/page";
+import Page from "../page/page";
 
 const Register = () => {
     const [name, setName] = useState<string>("");

@@ -46,7 +46,7 @@ export default function Page({ isSecurePage = false, headerEnabled = true, isLoa
             router.push("/account/verify");
         } else if (isBlacklistedWhenLoggedIn) {
             isLoading = true;
-            router.push("/account/overview");
+            router.push("/account");
         }
     }
 
