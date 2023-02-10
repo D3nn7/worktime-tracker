@@ -60,7 +60,7 @@ export default function NavBar() {
                     <ul className="flex flex-col p-4 mt-4 border rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:text-lg md:font-medium md:border-0  ">
                         <li>
                             <Link
-                                href={"/track"}
+                                href={"/tracking"}
                                 className="block py-2 pl-3 pr-4 "
                             >
                                 Track
@@ -68,7 +68,7 @@ export default function NavBar() {
                         </li>
                         <li>
                             <Link
-                                href="/history"
+                                href="/tracking/history"
                                 className="block py-2 pl-3 pr-4"
                             >
                                 History
