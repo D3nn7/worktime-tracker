@@ -46,10 +46,10 @@ export default function AccountDropdown(props: Props) {
                     </li>
                     <li>
                         <Link
-                            href={"/"}
+                            href={"/categories"}
                             className="block px-4 py-2 hover:bg-[#404040] rounded-md"
                         >
-                            Support
+                            Categories
                         </Link>
                     </li>
                     <li>
