@@ -1,3 +1,9 @@
+import NavBar from "../../components/navigation/NavBarTracking";
+
 export default function TrackTimes() {
-    return <></>;
+    return (
+        <div>
+            <NavBar />
+        </div>
+    );
 }
