@@ -20,7 +20,7 @@ export default function Header({ isUserLoggedIn }: { isUserLoggedIn: boolean }) 
             <div>
                 <h1>Worktime Tracker</h1>
                 <button onClick={logout}>Logout</button>
-                <Link href="/account/overview">Account Overview</Link>
+                <Link href="/account">Account Overview</Link>
             </div>
         );
     } else {

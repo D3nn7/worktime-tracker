@@ -3,13 +3,13 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import Alert from "../../components/page/alert";
-import Page from "../../components/page/page"
+import Alert from "../page/alert";
+import Page from "../page/page"
 import { appwrite, userState } from "../../store/global";
 import { User } from "../../store/types";
 import { AppwriteErrorType } from "../../utils/appwriteResponse";
 
-export default function Verify({ userId, secret} : { userId?: string, secret?: string }) {
+export default function VerifyUser({ userId, secret} : { userId?: string, secret?: string }): JSX.Element {
 	const [user] = useRecoilState<User>(userState);
 	const [verified, setVerified] = useState<boolean>(false);
 	const [alert, setAlert] = useState<string>("");
@@ -79,6 +79,7 @@ export default function Verify({ userId, secret} : { userId?: string, secret?: s
 		);
 	} else {
 		router.push("/account/overview");
+        return <></>;
 	}
 }
 

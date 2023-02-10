@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { FormEvent } from "react"
-import Alert from "../../components/page/alert";
+import Alert from "../page/alert";
 import { useRouter } from "next/router";
 import { appwrite } from "../../store/global";
-import Page from "../../components/page/page";
+import Page from "../page/page";
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
@@ -16,7 +16,7 @@ const Login = () => {
         event.preventDefault();
         try {
             await appwrite.account.createEmailSession(email, password);
-            router.push("/account/overview");
+            router.push("/account");
         } catch (error : any) {
             setAlert(error.message);
         }
