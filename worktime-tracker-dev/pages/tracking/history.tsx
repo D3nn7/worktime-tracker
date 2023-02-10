@@ -1,6 +1,6 @@
-import NavBar from "../components/navigation/NavBarTracking";
-import HistoryBox from "../components/history/HistoryBox";
-import { IHistoryBoxProps } from "../lib/types/types";
+import NavBar from "../../components/navigation/NavBarTracking";
+import HistoryBox from "../../components/history/HistoryBox";
+import { IHistoryBoxProps } from "../../lib/types/types";
 
 export default function History() {
     const histories = [

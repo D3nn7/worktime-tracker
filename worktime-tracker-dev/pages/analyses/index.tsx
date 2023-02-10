@@ -1,6 +1,6 @@
-import NavBar from "../components/navigation/NavBarTracking";
-import TimeBox from "../components/analyses/TimeBox";
-import CategoryBox from "../components/analyses/CategoryBox";
+import NavBar from "../../components/navigation/NavBarTracking";
+import TimeBox from "../../components/analyses/TimeBox";
+import CategoryBox from "../../components/analyses/CategoryBox";
 
 export default function Analyses() {
     return (
