@@ -27,3 +27,10 @@ export interface ITimeCardProps {
 export interface IFeatureProps {
     feature: string;
 }
+
+export interface IHistoryBoxProps {
+    description: string;
+    category: string;
+    timeSum: string;
+    duration: string;
+}
