@@ -1,8 +1,8 @@
-import NavBar from "../../navigation/NavBarTracking";
+import NavBar from "../components/navigation/NavBarTracking";
 import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
-import CategoryBox from "./CategoryBox";
-import NoEntryBox from "../../NoEntryBox";
+import CategoryBox from "../components/categories/CategoryBox";
+import NoEntryBox from "../components/NoEntryBox";
 
 export default function Categories() {
     const categories = [
