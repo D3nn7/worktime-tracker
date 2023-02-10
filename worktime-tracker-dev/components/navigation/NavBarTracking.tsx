@@ -9,7 +9,7 @@ import AccountSideBar from "./AccountSideBar";
 
 export default function NavBar() {
     const router = useRouter();
-    const [navAccount, setNavAccount] = useState<string>("account/account");
+    const [navAccount, setNavAccount] = useState<string>("account");
 
     useEffect(() => {
         if (router.query.id === "account") {

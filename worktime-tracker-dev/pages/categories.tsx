@@ -12,7 +12,7 @@ export default function Categories() {
     ];
 
     return (
-        <div className="bg-bg-base min-h-screen w-screen">
+        <div>
             <NavBar />
             <div className="container mx-auto pt-40 pb-20">
                 <div className="pb-20 ">

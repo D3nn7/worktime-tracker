@@ -1,9 +1,9 @@
-import NavBar from "../navigation/NavBarTracking";
+import NavBar from "../../components/navigation/NavBarTracking";
 import Link from "next/link";
 
 export default function Account() {
     return (
-        <div className="h-screen w-screen">
+        <div>
             <NavBar />
             <div className="pl-40 pt-40 pr-20 mx-auto container">
                 <div className="flex flex-row">

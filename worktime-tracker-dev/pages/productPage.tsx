@@ -37,7 +37,7 @@ export default function productPage() {
         },
     ];
     return (
-        <div className="bg-bg-base h-full w-screen">
+        <div>
             <NavBar />
             <div className="container mx-auto pt-60">
                 <div className="flex flex-row place-items-center ">

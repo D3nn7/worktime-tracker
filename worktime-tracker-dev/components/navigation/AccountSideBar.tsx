@@ -38,7 +38,7 @@ export default function AccountDropdown(props: Props) {
                     </li>
                     <li>
                         <Link
-                            href={"/account/account"}
+                            href={"/account"}
                             className="block px-4 py-2 hover:bg-[#404040] rounded-md"
                         >
                             Account Settings

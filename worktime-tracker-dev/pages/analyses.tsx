@@ -4,7 +4,7 @@ import CategoryBox from "../components/analyses/CategoryBox";
 
 export default function Analyses() {
     return (
-        <div className="bg-bg-base h-screen w-screen">
+        <div>
             <NavBar />
             <div className="container mx-auto pt-40">
                 <div className="text-3xl">Analyses</div>

@@ -4,3 +4,9 @@
 * {
     color: aliceblue;
 }
+
+html {
+    background-color: #171717;
+    min-height: 100vh;
+    width: 100vw;
+}
