@@ -2,7 +2,7 @@ import NavBar from "../../navigation/NavBarTracking";
 import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
 import CategoryBox from "./CategoryBox";
-import CategoryNoEntryBox from "./CategoryNoEntryBox";
+import NoEntryBox from "../../NoEntryBox";
 
 export default function Categories() {
     const categories = [
@@ -36,7 +36,7 @@ export default function Categories() {
                             description={category.description}
                         />
                     ))}
-                    <CategoryNoEntryBox
+                    <NoEntryBox
                         category="Something missing?"
                         description="add more categories to manage the tiimes more accurately"
                     />

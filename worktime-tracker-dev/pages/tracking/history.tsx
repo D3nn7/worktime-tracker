@@ -1,6 +1,7 @@
 import NavBar from "../../components/navigation/NavBarTracking";
 import HistoryBox from "../../components/history/HistoryBox";
 import { IHistoryBoxProps } from "../../lib/types/types";
+import NoEntryBox from "../../components/NoEntryBox";
 
 export default function History() {
     const histories = [
@@ -58,6 +59,10 @@ export default function History() {
                             />
                         );
                     })}
+                    <NoEntryBox
+                        category="No more tracked times here."
+                        description="Start tracking to see more here."
+                    />
                 </div>
             </div>
         </div>
