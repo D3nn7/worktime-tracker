@@ -34,3 +34,7 @@ export interface IHistoryBoxProps {
     timeSum: string;
     duration: string;
 }
+
+export interface IHistoryListProps {
+    histories: IHistoryBoxProps[];
+}

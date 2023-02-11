@@ -2,6 +2,7 @@ import NavBar from "../../components/navigation/NavBarTracking";
 import HistoryBox from "../../components/history/HistoryBox";
 import { IHistoryBoxProps } from "../../lib/types/types";
 import NoEntryBox from "../../components/NoEntryBox";
+import HistoryList from "../../components/history/HistoryList";
 
 export default function History() {
     const histories = [
@@ -47,23 +48,7 @@ export default function History() {
             <NavBar />
             <div className="container mx-auto pt-40 pb-20 ">
                 <div className="text-3xl ">History</div>
-                <div className="space-y-5 pt-10">
-                    {histories.map((history, index) => {
-                        return (
-                            <HistoryBox
-                                key={index}
-                                category={history.category}
-                                description={history.description}
-                                timeSum={history.timeSum}
-                                duration={history.duration}
-                            />
-                        );
-                    })}
-                    <NoEntryBox
-                        category="No more tracked times here."
-                        description="Start tracking to see more here."
-                    />
-                </div>
+                <HistoryList histories={histories} />
             </div>
         </div>
     );
