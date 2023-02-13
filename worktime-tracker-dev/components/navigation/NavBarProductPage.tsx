@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../assets/WorkTimeTrackerLogo.svg";
+import Logo from "../../public/static/WorktimeTrackerLogo.svg";
 
 export default function NavBar() {
     return (

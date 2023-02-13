@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../assets/Logo.svg";
+import Logo from "../../public/static/Logo.svg";
 import { useRouter } from "next/router";
 import AccountSideBar from "./AccountSideBar";
 
