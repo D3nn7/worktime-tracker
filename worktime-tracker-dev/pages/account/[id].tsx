@@ -4,7 +4,7 @@ import Verify from "../../components/account/Verify";
 import ResetPassword from "../../components/account/ResetPassword";
 import { NextRequest } from "next/server";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Logo from "../../public/static/Logo.svg";
 
 export default function AccountDefault(req: NextRequest) {

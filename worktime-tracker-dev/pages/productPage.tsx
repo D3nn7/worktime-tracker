@@ -1,5 +1,5 @@
 import NavBar from "../components/navigation/NavBarProductPage";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Clock from "../public/static/Clock.svg";
 import Logo from "../public/static/WorktimeTrackerLogo.svg";
 import TimeCards from "../components/productPage/TimeCards";
@@ -135,6 +135,8 @@ export default function productPage() {
                         src={Logo}
                         className="h-6 mr-3 sm:h-9"
                         alt="Logo"
+                        height={40}
+                        width={40}
                         priority
                     />
                     <span className="pt-1">

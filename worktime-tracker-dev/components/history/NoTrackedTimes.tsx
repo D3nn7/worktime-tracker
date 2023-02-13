@@ -1,5 +1,5 @@
 import Logo from "../../public/static/addNotesLogo.svg";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function NoTrackedTimes() {
     return (
