@@ -38,3 +38,7 @@ export interface IHistoryBoxProps {
 export interface IHistoryListProps {
     histories: IHistoryBoxProps[];
 }
+
+export interface IDropdownProps {
+    items: string[];
+}
