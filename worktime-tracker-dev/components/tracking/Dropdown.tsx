@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import { IDropdownProps as Props } from "../../lib/types/types";
 
 export default function Dropdown(props: Props) {
-    const [selection, setSelection] = useState<string>("");
-
-    useEffect(() => {
-        // get first item from props.items
-        // const firstItem = props.items[0];
-        // setSelection(firstItem);
-    }, []);
+    const [selection, setSelection] = useState<string>("Select a category");
 
     const toggleDropdown = () => {
         const dropdown = document.getElementById("idTimeBoxDropdown")!;
@@ -26,7 +20,7 @@ export default function Dropdown(props: Props) {
                 id="dropdownDefaultButton"
                 onClick={() => toggleDropdown()}
                 data-dropdown-toggle="dropdown"
-                className="bg-[#303030] hover:bg-[#404040] -4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                className="bg-account-input hover:bg-[#303030] -4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
                 type="button"
             >
                 {selection}
@@ -48,36 +42,27 @@ export default function Dropdown(props: Props) {
             </button>
             <div
                 id="idTimeBoxDropdown"
-                className="z-10 absolute hidden bg-[#303030] border-[#454545] border-2 divide-y divide-gray-100 rounded-lg shadow w-44 mt-2"
+                className="z-10 absolute hidden bg-account-input border-[#303030] border-2 divide-y divide-gray-100 rounded-lg shadow w-44 mt-2"
             >
                 <ul
                     className="py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownDefaultButton"
                 >
-                    <li onClick={() => handleSelection("Daily")}>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-[#404040]"
-                        >
-                            Daily
-                        </a>
-                    </li>
-                    <li onClick={() => handleSelection("Weekly")}>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-[#404040]"
-                        >
-                            Weekly
-                        </a>
-                    </li>
-                    <li onClick={() => handleSelection("Monthly")}>
-                        <a
-                            href="#"
-                            className="block px-4 py-2 hover:bg-[#404040]"
-                        >
-                            Monthly
-                        </a>
-                    </li>
+                    {props.items.map((item) => {
+                        return (
+                            <li
+                                key={item}
+                                onClick={() => handleSelection(item)}
+                            >
+                                <a
+                                    href="#"
+                                    className="block px-4 py-2 hover:bg-[#404040]"
+                                >
+                                    {item}
+                                </a>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </div>
