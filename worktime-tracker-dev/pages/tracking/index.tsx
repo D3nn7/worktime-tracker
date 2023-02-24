@@ -50,7 +50,7 @@ export default function TrackTimes() {
             <NavBar />
             <div className="container mx-auto pt-40 pb-20 ">
                 <Start setIsTracking={setIsTracking} />
-                <div className="text-3xl ">Recent tasks</div>
+                <div className="text-3xl pt-16">Recent tasks</div>
                 <HistoryList histories={histories} />
             </div>
         </div>
