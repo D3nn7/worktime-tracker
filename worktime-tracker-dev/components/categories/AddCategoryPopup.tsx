@@ -53,7 +53,7 @@ export default function AddCategoryPopup(props: Props) {
                                 onChange={(event: any) =>
                                     handleChangeCategoryName(event)
                                 }
-                                className="bg-account-input h-10 w-full rounded-md outline-none "
+                                className="bg-account-input h-10 w-full rounded-md outline-none focus:ring-0 focus:border-cyan-base"
                                 required={true}
                             />
                         </div>
@@ -67,7 +67,7 @@ export default function AddCategoryPopup(props: Props) {
                                 onChange={(event: any) =>
                                     handleChangeCategoryDescription(event)
                                 }
-                                className="bg-account-input h-10 w-full rounded-md outline-none"
+                                className="bg-account-input h-10 w-full rounded-md outline-none focus:ring-0 focus:border-cyan-base"
                                 required={true}
                             />
                         </div>
