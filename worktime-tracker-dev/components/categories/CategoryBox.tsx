@@ -3,6 +3,14 @@ import { mdiPencil, mdiDelete } from "@mdi/js";
 import { IAccountCategoryBoxProps as Props } from "../../lib/types/types";
 
 export default function CategoryBox(props: Props) {
+    const handleDelete = () => {
+        props.handleDelete(props.id);
+    };
+
+    const handleEdit = () => {
+        props.handleEdit(props.id);
+    };
+
     return (
         <div className="bg-[#262626] rounded-md shadow-md p-4">
             <div className="flex flex-row">
@@ -13,10 +21,16 @@ export default function CategoryBox(props: Props) {
                     </span>
                 </div>
                 <div className="flex flex-row ml-auto space-x-3">
-                    <button className="bg-[#303030] hover:bg-[#404040] text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0">
+                    <button
+                        onClick={handleEdit}
+                        className="bg-[#303030] hover:bg-[#404040] text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
+                    >
                         <Icon path={mdiPencil} size={1} color="white" />
                     </button>
-                    <button className="bg-[#303030] hover:bg-[#FD8180] text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0">
+                    <button
+                        onClick={handleDelete}
+                        className="bg-[#303030] hover:bg-[#FD8180] text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
+                    >
                         <Icon path={mdiDelete} size={1} color="white" />
                     </button>
                 </div>

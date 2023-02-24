@@ -13,6 +13,20 @@ export interface IAccountDropdownProps {
 }
 
 export interface IAccountCategoryBoxProps {
+    id: string;
+    category: string;
+    description: string;
+    handleDelete: (id: string) => void;
+    handleEdit: (id: string) => void;
+}
+
+export interface IAccountCategoryBoxState {
+    id: string;
+    category: string;
+    description: string;
+}
+export interface IAccountNoCategoryBoxProps {
+    id: string;
     category: string;
     description: string;
 }
