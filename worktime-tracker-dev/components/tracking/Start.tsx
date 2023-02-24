@@ -1,13 +1,18 @@
 import Icon from "@mdi/react";
-import { mdiPlay } from "@mdi/js";
+import { mdiPlay, mdiStopCircle } from "@mdi/js";
 import { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
+import { useStopwatch } from "react-timer-hook";
 
-export default function Start() {
+interface Props {
+    setIsTracking: (value: boolean) => void;
+}
+
+export default function Start(props: Props) {
     const [inputValue, setInputValue] = useState<string>("");
+    const [isTracking, setIsTracking] = useState<boolean>(false);
     const [duration, setDuration] = useState<string>("00:00:00");
     const [select, setSelect] = useState<string>("Select a category");
-    const [isTracking, setIsTracking] = useState<boolean>(false);
     const categories = [
         "Development",
         "Design",
@@ -20,17 +25,28 @@ export default function Start() {
         "Personal",
     ];
 
-    // update state when set duration is called
-    useEffect(() => {
-        counter();
-    }, [isTracking]);
+    const { seconds, minutes, hours, days, isRunning, start, pause, reset } =
+        useStopwatch({ autoStart: true });
+
+    const handleTracking = () => {
+        if (isTracking) {
+            handleStop();
+        } else {
+            handleStart();
+        }
+    };
 
     const handleStart = () => {
         checkFieldsToStartTracking();
     };
 
+    const handleStop = () => {
+        stopTracking();
+        resetTracking();
+    };
+
     const checkFieldsToStartTracking = () => {
-        if (inputValue !== "" || select !== "Select a category") {
+        if (inputValue !== "" && select !== "Select a category") {
             startTracking();
         } else {
             // TODO: Add info dialog
@@ -39,42 +55,35 @@ export default function Start() {
     };
 
     const startTracking = () => {
+        start();
         setIsTracking(true);
-        counter();
+        props.setIsTracking(true);
     };
 
-    // counter function to count up the duration
-    const counter = () => {
-        let seconds = 0;
-        let minutes = 0;
-        let hours = 0;
+    const stopTracking = () => {
+        pause();
+        setIsTracking(false);
+        props.setIsTracking(false);
+    };
 
-        while (isTracking) {
-            seconds++;
-            if (seconds === 60) {
-                seconds = 0;
-                minutes++;
-            }
-            if (minutes === 60) {
-                minutes = 0;
-                hours++;
-            }
-            setDuration(
-                `${hours.toString().padStart(2, "0")}:${minutes
-                    .toString()
-                    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-            );
-        }
+    const resetTracking = () => {
+        reset();
+        setInputValue("");
+        setSelect("Select a category");
     };
 
     return (
         <div className="grid grid-flow-row grid-cols-12">
             <div className="col-start-4 col-end-4 ">
                 <button
-                    onClick={handleStart}
+                    onClick={handleTracking}
                     className=" p-8  bg-cyan-base flex mx-auto rounded-lg "
                 >
-                    <Icon path={mdiPlay} size={3} />
+                    {isTracking ? (
+                        <Icon path={mdiStopCircle} size={3} />
+                    ) : (
+                        <Icon path={mdiPlay} size={3} />
+                    )}
                 </button>
             </div>
             <div className="grid-flow-col col-start-6 col-end-10 space-y-3">
@@ -88,13 +97,22 @@ export default function Start() {
                     className="bg-account-input h-10 w-full pl-2 rounded-md focus:ring-0  border-0 outline-none"
                     required={true}
                 />
-                <Dropdown key={inputValue} items={categories} />
-                <div className="flex flex-row place-items-center">
-                    <span className="pr-3">Duration</span>
-                    <span className="px-5 py-1 bg-account-input rounded-lg">
-                        {duration}
-                    </span>
-                </div>
+                <Dropdown
+                    key={inputValue}
+                    items={categories}
+                    selection={select}
+                    setSelect={setSelect}
+                />
+                {isTracking ? (
+                    <div className="flex flex-row place-items-center">
+                        <span className="pr-3">Duration</span>
+                        <span className="px-5 py-1 bg-account-input rounded-lg">
+                            {hours.toString().padStart(2, "0")}:
+                            {minutes.toString().padStart(2, "0")}:
+                            {seconds.toString().padStart(2, "0")}
+                        </span>
+                    </div>
+                ) : null}
             </div>
         </div>
     );

@@ -41,4 +41,6 @@ export interface IHistoryListProps {
 
 export interface IDropdownProps {
     items: string[];
+    selection: string;
+    setSelect: (item: string) => void;
 }

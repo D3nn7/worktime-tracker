@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IDropdownProps as Props } from "../../lib/types/types";
 
 export default function Dropdown(props: Props) {
-    const [selection, setSelection] = useState<string>("Select a category");
+    const [selection, setSelection] = useState<string>(props.selection);
 
     const toggleDropdown = () => {
         const dropdown = document.getElementById("idTimeBoxDropdown")!;
@@ -11,6 +11,7 @@ export default function Dropdown(props: Props) {
 
     const handleSelection = (selection: string) => {
         setSelection(selection);
+        props.setSelect(selection);
         toggleDropdown();
     };
 
