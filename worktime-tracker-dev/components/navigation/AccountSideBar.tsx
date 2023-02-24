@@ -1,6 +1,8 @@
 import { IAccountDropdownProps as Props } from "../../lib/types/types";
 import { useState } from "react";
 import Link from "next/link";
+import Icon from "@mdi/react";
+import { mdiClose } from "@mdi/js";
 
 export default function AccountDropdown(props: Props) {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -12,7 +14,7 @@ export default function AccountDropdown(props: Props) {
                     className="flex text-4xl text-white items-center cursor-pointer fixed right-10 top-6 z-50"
                     onClick={() => setShowSidebar(!showSidebar)}
                 >
-                    x
+                    <Icon path={mdiClose} size={1.5} />
                 </button>
             )}
             <button
