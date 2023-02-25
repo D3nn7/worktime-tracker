@@ -61,7 +61,7 @@ export default function EditCategoryPopup(props: Props) {
                                 onChange={(event: any) =>
                                     handleChangeCategoryName(event)
                                 }
-                                className="bg-account-input h-10 w-full rounded-md outline-none focus:ring-0 focus:border-cyan-base"
+                                className="bg-account-input h-10 w-full rounded-md outline-none focus:ring-0 pl-2 border-[1px] border-[#505358] focus:border-cyan-base"
                                 required={true}
                             />
                         </div>
@@ -75,13 +75,13 @@ export default function EditCategoryPopup(props: Props) {
                                 onChange={(event: any) =>
                                     handleChangeCategoryDescription(event)
                                 }
-                                className="bg-account-input h-10 w-full rounded-md outline-none focus:ring-0 focus:border-cyan-base"
+                                className="bg-account-input h-10 w-full rounded-md outline-none focus:ring-0 pl-2 border-[1px] border-[#505358] focus:border-cyan-base"
                                 required={true}
                             />
                         </div>
                         <div className="float-right">
                             <button
-                                className="px-4 py-2 bg-cyan-base rounded-md flex items-center"
+                                className="px-4 py-2 bg-cyan-base hover:opacity-75 rounded-md flex items-center"
                                 onClick={handleEditCategory}
                             >
                                 <Icon
