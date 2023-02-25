@@ -11,6 +11,9 @@ interface Props {
 export default function AddCategoryPopup(props: Props) {
     const [categoryName, setCategoryName] = useState("");
     const [categoryDescription, setCategoryDescription] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+
+
 
     const handleChangeCategoryName = (event: any) => {
         if (event.target.value.length !== null) {
@@ -27,18 +30,32 @@ export default function AddCategoryPopup(props: Props) {
     const handleAddCategory = () => {
         if (categoryName.length > 0 && categoryDescription.length > 0) {
             props.addCategory(categoryName, categoryDescription);
-            props.closePopup();
+            setIsOpen(false);
+            setTimeout(() => {
+                props.closePopup();
+            }, 400);
         }
     };
+
+    const handleClosePopup = () => {
+        setIsOpen(false);
+        setTimeout(() => {
+            props.closePopup();
+        }, 400);
+    };
+
+    useEffect(() => {
+        setIsOpen(true);
+    }, []);
 
     return (
         <>
             <div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-10 flex justify-center items-center">
-                <div className="bg-[#303030] py-16 px-10 rounded-xl">
+                <div className={`bg-[#303030] py-16 px-10 rounded-xl transition-all  duration-500 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}>
                     <div className="w-full h-10 flex justify-between items-center pb-10">
                         <span className="text-2xl">Add Category</span>
                         <button
-                            onClick={props.closePopup}
+                            onClick={handleClosePopup}
                             className="text-2xl font-semibold"
                         >
                             <Icon path={mdiClose} size={1.3} />

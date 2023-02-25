@@ -12,6 +12,7 @@ interface Props {
 export default function EditCategoryPopup(props: Props) {
     const [categoryName, setCategoryName] = useState("");
     const [categoryDescription, setCategoryDescription] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         if (props.editCategoryVaues !== undefined) {
@@ -35,18 +36,32 @@ export default function EditCategoryPopup(props: Props) {
     const handleEditCategory = () => {
         if (categoryName.length > 0 && categoryDescription.length > 0) {
             props.editCategory(categoryName, categoryDescription);
-            props.closePopup();
+            setIsOpen(false);
+            setTimeout(() => {
+                props.closePopup();
+            }, 400);
         }
     };
+
+    const handleClosePopup = () => {
+        setIsOpen(false);
+        setTimeout(() => {
+            props.closePopup();
+        }, 400);
+    };
+
+    useEffect(() => {
+        setIsOpen(true);
+    }, []);
 
     return (
         <>
             <div className="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-50 z-10 flex justify-center items-center">
-                <div className="bg-[#303030] py-16 px-10 rounded-xl">
+                <div className={`bg-[#303030] py-16 px-10 rounded-xl transition-all  duration-500 ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}>
                     <div className="w-full h-10 flex justify-between items-center pb-10">
                         <span className="text-2xl">Edit Category</span>
                         <button
-                            onClick={props.closePopup}
+                            onClick={handleClosePopup}
                             className="text-2xl font-semibold"
                         >
                             <Icon path={mdiClose} size={1.3} />
