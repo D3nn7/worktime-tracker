@@ -17,6 +17,7 @@ export default function HistoryList(props: Props) {
                 );
             })}
             <NoEntryBox
+                id="2"
                 category="No more tracked times here."
                 description="Start tracking to see more here."
             />
