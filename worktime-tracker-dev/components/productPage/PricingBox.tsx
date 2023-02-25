@@ -1,3 +1,4 @@
+import Link from "next/link";
 import FeatureIncludes from "./FeatureIncludes";
 
 export default function PricingBox() {
@@ -36,7 +37,9 @@ export default function PricingBox() {
                     <span className="text-3xl">Free</span>
                     <div className="pt-5">
                         <button className="px-3 py-2 bg-cyan-base rounded-md items-center ">
-                            Get started now
+                            <Link href={{ pathname: "./account/register" }}>
+                                <span>Get started now</span>
+                            </Link>
                         </button>
                     </div>
                 </div>

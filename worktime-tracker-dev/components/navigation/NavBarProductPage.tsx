@@ -23,7 +23,7 @@ export default function NavBar() {
                         type="button"
                         className="bg-cyan-base hover:bg-teal-600 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
                     >
-                        <Link className="scroll-smooth" href={{ pathname: "account/register" }}>
+                        <Link href={{ pathname: "account/register" }}>
                             Get started
                         </Link>
                     </button>

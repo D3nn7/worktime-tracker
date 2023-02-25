@@ -49,8 +49,10 @@ export default function productPage() {
                                 Worktime-Tracker, the really simple time tracking
                                 tool.
                             </span>
-                            <button className="px-4 py-2 bg-cyan-base rounded-md items-center w-48">
-                                Start now for free
+                            <button className="px-4 py-2 bg-cyan-base rounded-md items-center w-48"  >
+                                <Link href={{ pathname: "./account/register" }}>
+                                    <span >Start now for free</span>
+                                </Link>
                             </button>
                         </div>
                         <div>
