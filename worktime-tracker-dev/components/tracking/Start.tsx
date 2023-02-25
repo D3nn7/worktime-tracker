@@ -93,7 +93,7 @@ export default function Start(props: Props) {
                     onChange={(event: any) => {
                         setInputValue(event.target.value);
                     }}
-                    className="bg-account-input h-10 w-full pl-2 rounded-md focus:ring-0  border-0 outline-none"
+                    className="bg-account-input h-10 w-full pl-2 rounded-md focus:ring-0  outline-none border-[1px] border-[#505358] focus:border-cyan-base"
                     required={true}
                 />
                 <Dropdown
