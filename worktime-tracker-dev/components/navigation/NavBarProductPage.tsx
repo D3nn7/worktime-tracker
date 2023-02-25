@@ -23,7 +23,7 @@ export default function NavBar() {
                         type="button"
                         className="bg-cyan-base hover:bg-teal-600 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
                     >
-                        <Link href={{ pathname: "account/register" }}>
+                        <Link className="scroll-smooth" href={{ pathname: "account/register" }}>
                             Get started
                         </Link>
                     </button>
@@ -56,24 +56,24 @@ export default function NavBar() {
                 >
                     <ul className="flex flex-col p-4 mt-4 border rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:text-lg md:font-medium md:border-0  ">
                         <li>
-                            <Link href="#" className="block py-2 pl-3 pr-4 ">
+                            <Link href="#" className="block py-2 pl-3 pr-4">
                                 Home
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block py-2 pl-3 pr-4">
+                            <Link href="#features" className="block py-2 pl-3 pr-">
                                 Features
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block py-2 pl-3 pr-4 ">
+                            <Link href="#pricing" className="block py-2 pl-3 pr-4 ">
                                 Pricing
                             </Link>
                         </li>
-                        <li>
-                            <a href="#" className="block py-2 pl-3 pr-4">
+                         <li>
+                            <Link href="mailto:jonasbott2@web.de" className="block py-2 pl-3 pr-4">
                                 Contact
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

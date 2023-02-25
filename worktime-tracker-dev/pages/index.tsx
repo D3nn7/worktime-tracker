@@ -37,99 +37,105 @@ export default function productPage() {
         },
     ];
     return (
-        <div>
+        <main className="scroll-smooth">
             <NavBar />
             <div className="container mx-auto pt-60">
-                <div className="flex flex-row place-items-center ">
-                    <div className="flex flex-col pr-60 space-y-5">
-                        <span className="text-xl">
-                            Fed up with over-inflated and complicated time
-                            tracking tools? <br /> No problem, just switch to
-                            Worktime-Tracker, the really simple time tracking
-                            tool.
+                <section id="overview">
+                    <div className="flex flex-row place-items-center ">
+                        <div className="flex flex-col pr-60 space-y-5">
+                            <span className="text-xl">
+                                Fed up with over-inflated and complicated time
+                                tracking tools? <br /> No problem, just switch to
+                                Worktime-Tracker, the really simple time tracking
+                                tool.
+                            </span>
+                            <button className="px-4 py-2 bg-cyan-base rounded-md items-center w-48">
+                                Start now for free
+                            </button>
+                        </div>
+                        <div>
+                            <Image src={Clock} alt="Clock" height={500} priority />
+                        </div>
+                    </div>
+                    <div className="flex flex-col place-items-center pt-28">
+                        <span className="text-4xl font-bold ">
+                            The simple way to track worktime
                         </span>
-                        <button className="px-4 py-2 bg-cyan-base rounded-md items-center w-48">
-                            Start now for free
-                        </button>
-                    </div>
-                    <div>
-                        <Image src={Clock} alt="Clock" height={500} priority />
-                    </div>
-                </div>
-                <div className="flex flex-col place-items-center pt-28">
-                    <span className="text-4xl font-bold ">
-                        The simple way to track worktime
-                    </span>
-                    <span className="text-2xl pt-3">
-                        Comprehensive but still kept simple
-                    </span>
-                </div>
-                <div className="flex flex-row pt-16 w-full place-items-center ">
-                    <div className="pr-20 text-lg w-8/12 space-y-5">
-                        <p>
-                            It has never been so easy to record your working
-                            time. Just enter what you are doing, add the
-                            appropriate category and off you go. At the end of
-                            the task simply stop again, and the rest happens all
-                            by itself.
-                        </p>
-                        <p>
-                            With the recorded time you can always see the
-                            analysis of your tasks and categories to keep track
-                            of yourself.
-                        </p>
-                        <div>
-                            <p>So why are you still waiting?</p>
-                            <Link
-                                href={{ pathname: "./account/register" }}
-                                className="text-color-reg-now"
-                            >
-                                Register here for free
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="flex flex-col space-y-5 w-4/12">
-                        {timeCardProps.map((props, index) => (
-                            <TimeCards
-                                key={index}
-                                category={props.category}
-                                description={props.description}
-                                time={props.time}
-                                hexColor={props.hexColor}
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div className="pt-40 text-4xl font-bold">What is included</div>
-                <div className="flex flex-row pt-8 w-full">
-                    <div className="text-lg w-2/4 mr-auto">
-                        Powerful tool with useful features to record your
-                        working time in a simple and uncomplicated way.
-                    </div>
-                    <div className="w-2/4 space-x-10 justify-end flex flex-row">
-                        <div>
-                            <Feature feature="Calendar View" />
-                            <Feature feature="List view" />
-                            <Feature feature="Custom categories" />
-                            <Feature feature="Analyses" />
-                        </div>
-                        <div>
-                            <Feature feature="Sync between devices" />
-                            <Feature feature="Data secured stored" />
-                            <Feature feature="Timesheet sharing (soon)" />
-                            <Feature feature="Desktop/Mobile version" />
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full py-32">
-                    <div className="text-center flex flex-col space-y-5 pb-10">
-                        <span className="text-4xl">Pricing</span>
-                        <span className="text-2xl">
-                            We do not pursue profit, but the general benefit.
+                        <span className="text-2xl pt-3">
+                            Comprehensive but still kept simple
                         </span>
                     </div>
-                    <PricingBox />
-                </div>
+                    <div className="flex flex-row pt-16 w-full place-items-center ">
+                        <div className="pr-20 text-lg w-8/12 space-y-5">
+                            <p>
+                                It has never been so easy to record your working
+                                time. Just enter what you are doing, add the
+                                appropriate category and off you go. At the end of
+                                the task simply stop again, and the rest happens all
+                                by itself.
+                            </p>
+                            <p>
+                                With the recorded time you can always see the
+                                analysis of your tasks and categories to keep track
+                                of yourself.
+                            </p>
+                            <div>
+                                <p>So why are you still waiting?</p>
+                                <Link
+                                    href={{ pathname: "./account/register" }}
+                                    className="text-color-reg-now"
+                                >
+                                    Register here for free
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="flex flex-col space-y-5 w-4/12">
+                            {timeCardProps.map((props, index) => (
+                                <TimeCards
+                                    key={index}
+                                    category={props.category}
+                                    description={props.description}
+                                    time={props.time}
+                                    hexColor={props.hexColor}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                <section id="features">
+                    <div className="pt-40 text-4xl font-bold">What is included</div>
+                    <div className="flex flex-row pt-8 w-full">
+                        <div className="text-lg w-2/4 mr-auto">
+                            Powerful tool with useful features to record your
+                            working time in a simple and uncomplicated way.
+                        </div>
+                        <div className="w-2/4 space-x-10 justify-end flex flex-row">
+                            <div>
+                                <Feature feature="Calendar View" />
+                                <Feature feature="List view" />
+                                <Feature feature="Custom categories" />
+                                <Feature feature="Analyses" />
+                            </div>
+                            <div>
+                                <Feature feature="Sync between devices" />
+                                <Feature feature="Data secured stored" />
+                                <Feature feature="Timesheet sharing (soon)" />
+                                <Feature feature="Desktop/Mobile version" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="pricing">
+                    <div className="w-full py-32">
+                        <div className="text-center flex flex-col space-y-5 pb-10">
+                            <span className="text-4xl">Pricing</span>
+                            <span className="text-2xl">
+                                We do not pursue profit, but the general benefit.
+                            </span>
+                        </div>
+                        <PricingBox />
+                    </div>
+                </section>
                 <div className="flex flex-col place-items-center pb-5">
                     <Image
                         src={Logo}
@@ -175,6 +181,6 @@ export default function productPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }
