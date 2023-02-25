@@ -58,7 +58,7 @@ export default function Account() {
                                     Change password
                                 </Link>
                             </button>
-                            <button className="py-2.5 px-5 w-[170px] rounded-lg text-bg-base bg-[#FD8180]">
+                            <button className="py-2.5 px-5 w-[170px] rounded-lg text-bg-base bg-red-base">
                                 Delete account
                             </button>
                         </div>
