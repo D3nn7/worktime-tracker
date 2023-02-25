@@ -1,4 +1,3 @@
-import { useState } from "react";
 import HistoryList from "../../components/history/HistoryList";
 import NavBar from "../../components/navigation/NavBarTracking";
 import TrackTimes from "../../components/tracking/TrackTimes";
