@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HistoryList from "../../components/history/HistoryList";
 import NavBar from "../../components/navigation/NavBarTracking";
-import Start from "../../components/tracking/Start";
+import TrackTimes from "../../components/tracking/TrackTimes";
 import { IHistoryBoxProps } from "../../lib/types/types";
 
-export default function TrackTimes() {
-    const [isTracking, setIsTracking] = useState<boolean>(false);
+export default function Tracking() {
     const histories = [
         {
             description: "Add LinkedIn Post",
@@ -49,7 +48,7 @@ export default function TrackTimes() {
         <div>
             <NavBar />
             <div className="container mx-auto pt-40 pb-20 ">
-                <Start setIsTracking={setIsTracking} />
+                <TrackTimes />
                 <div className="text-3xl pt-16">Recent tasks</div>
                 <HistoryList histories={histories} />
             </div>

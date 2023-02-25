@@ -5,9 +5,8 @@ import CategoryBox from "../components/categories/CategoryBox";
 import NoEntryBox from "../components/NoEntryBox";
 import AddCategoryPopup from "../components/categories/AddCategoryPopup";
 import EditCategoryPopup from "../components/categories/EditCategoryPopup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
-    IAccountCategoryBoxProps as CategoryBoxProps,
     IAccountCategoryBoxState as State,
 } from "../lib/types/types";
 
@@ -46,7 +45,7 @@ export default function Categories() {
             categories?.push({
                 id: (categories === undefined
                     ? 1
-                    : categories!.length + 1
+                    : categories.length + 1
                 ).toString(),
                 category: categoryName,
                 description: categoryType,
@@ -87,15 +86,15 @@ export default function Categories() {
                 </div>
                 <div className="mt-10 flex flex-col space-y-8">
                     {categories !== undefined
-                        ? categories!.map((category, index) => (
+                        ? categories.map((category, index) => (
                               <CategoryBox
                                   key={index}
                                   id={category.id}
                                   category={category.category}
                                   description={category.description}
                                   handleDelete={() => {
-                                      categories!.splice(index, 1);
-                                      setCategories([...categories!]);
+                                      categories.splice(index, 1);
+                                      setCategories([...categories]);
                                   }}
                                   handleEdit={() => {
                                       handleEditCategory({

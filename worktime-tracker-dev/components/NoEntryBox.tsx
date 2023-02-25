@@ -1,5 +1,3 @@
-import Icon from "@mdi/react";
-import { mdiPencil, mdiDelete } from "@mdi/js";
 import { IAccountNoCategoryBoxProps as Props } from "../lib/types/types";
 
 export default function NoEntryBox(props: Props) {

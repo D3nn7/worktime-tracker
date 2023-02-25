@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiPlusCircle, mdiClose } from "@mdi/js";
-import { IAccountCategoryBoxState as props } from "../../lib/types/types";
 
 interface Props {
     addCategory: (categoryName: string, categoryType: string) => void;
@@ -12,8 +11,6 @@ export default function AddCategoryPopup(props: Props) {
     const [categoryName, setCategoryName] = useState("");
     const [categoryDescription, setCategoryDescription] = useState("");
     const [isOpen, setIsOpen] = useState(false);
-
-
 
     const handleChangeCategoryName = (event: any) => {
         if (event.target.value.length !== null) {

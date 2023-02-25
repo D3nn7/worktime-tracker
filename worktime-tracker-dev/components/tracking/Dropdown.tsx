@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IDropdownProps as Props } from "../../lib/types/types";
 
 export default function Dropdown(props: Props) {
