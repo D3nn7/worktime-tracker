@@ -28,13 +28,9 @@ export default function AccountDefault(req: NextRequest) {
     return (
         <div className="bg-gradient-to-b from-cyan-base to-green-base">
             <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
-                <div className="flex flex-row">
-                    <div className="flex-initial mr-3">
-                        <Image src={Logo} alt="Logo" width={30} />
-                    </div>
-                    <div className="flex-initial">
-                        <h1 className="text-2xl">Worktime Tracker</h1>
-                    </div>
+                <div className="flex flex-row space-x-5">
+                        <Image src={Logo} alt="Logo" width={30} height={30} />
+                        <span className="text-2xl">Worktime Tracker</span>
                 </div>
                 <div className="flex flex-col">{checkAccount()}</div>
             </div>
