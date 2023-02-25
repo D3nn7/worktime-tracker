@@ -3,6 +3,7 @@ import { mdiPlay, mdiStopCircle } from "@mdi/js";
 import { useEffect, useState } from "react";
 import Dropdown from "./Dropdown";
 import { useStopwatch } from "react-timer-hook";
+import { Toaster, toast } from "sonner";
 
 interface Props {
     setIsTracking: (value: boolean) => void;
@@ -11,7 +12,6 @@ interface Props {
 export default function Start(props: Props) {
     const [inputValue, setInputValue] = useState<string>("");
     const [isTracking, setIsTracking] = useState<boolean>(false);
-    const [duration, setDuration] = useState<string>("00:00:00");
     const [select, setSelect] = useState<string>("Select a category");
     const categories = [
         "Development",
@@ -49,8 +49,7 @@ export default function Start(props: Props) {
         if (inputValue !== "" && select !== "Select a category") {
             startTracking();
         } else {
-            // TODO: Add info dialog
-            alert("Please fill in all fields");
+            toast.error("Please fill in all fields");
         }
     };
 
@@ -114,6 +113,7 @@ export default function Start(props: Props) {
                     </div>
                 ) : null}
             </div>
+            <Toaster richColors theme="dark" position="top-center" closeButton  />
         </div>
     );
 }
