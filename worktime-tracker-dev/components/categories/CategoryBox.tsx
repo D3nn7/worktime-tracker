@@ -1,14 +1,31 @@
 import Icon from "@mdi/react";
 import { mdiPencil, mdiDelete } from "@mdi/js";
 import { IAccountCategoryBoxProps as Props } from "../../lib/types/types";
+import { useState } from "react";
+import ConfirmDialog from "../ConfirmDialog";
 
 export default function CategoryBox(props: Props) {
-    const handleDelete = () => {
-        props.handleDelete(props.id);
+    const [showConfirmDialog, setShowConfirmDialog] = useState<boolean>(false);
+    
+    const onDelete = () => {
+        setShowConfirmDialog(true);
+    };
+
+    const handleCancel = () => {
+        setShowConfirmDialog(false);
+    };
+
+    const handleConfirm = () => {
+        handleDelete();
+        setShowConfirmDialog(false);
     };
 
     const handleEdit = () => {
         props.handleEdit(props.id);
+    };
+
+    const handleDelete = () => {
+        props.handleDelete(props.id);
     };
 
     return (
@@ -28,13 +45,14 @@ export default function CategoryBox(props: Props) {
                         <Icon path={mdiPencil} size={1} color="white" />
                     </button>
                     <button
-                        onClick={handleDelete}
-                        className="bg-[#303030] hover:bg-[#FD8180] text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
+                        onClick={onDelete}
+                        className="bg-[#303030] hover:bg-red-base text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
                     >
                         <Icon path={mdiDelete} size={1} color="white" />
                     </button>
                 </div>
             </div>
+            {showConfirmDialog && (<ConfirmDialog title="Delete category" message="Do you really want to delete this category?" onCancel={handleCancel} onConfirm={handleConfirm} />) }
         </div>
     );
 }

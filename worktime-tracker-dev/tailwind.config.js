@@ -14,6 +14,7 @@ module.exports = {
                 "color-reg-now": "#00BFA6",
                 "account-input": "#262626",
                 "orange-base": "#FDC685",
+                "red-base": "#FD8180",
             },
             width: {
                 "account-input": "360px",
@@ -23,5 +24,4 @@ module.exports = {
             },
         },
     },
-    plugins: [require("flowbite/plugin")],
 };
