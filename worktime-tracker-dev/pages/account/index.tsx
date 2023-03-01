@@ -17,7 +17,7 @@ export default function Account() {
                     </div>
                     <div className="w-full">
                         <div className="pb-10">
-                            <h1 className="text-3xl pb-8">Hej Jonas Bott</h1>
+                            <h1 className="text-3xl pb-8">Hi Jonas Bott</h1>
                             <form action="">
                                 <div className="flex flex-col pb-5">
                                     <label htmlFor="" className="pb-1">
@@ -58,7 +58,10 @@ export default function Account() {
                                     Change password
                                 </Link>
                             </button>
-                            <button hidden className="py-2.5 px-5 w-[170px] rounded-lg text-bg-base bg-red-base">
+                            <button
+                                hidden
+                                className="py-2.5 px-5 w-[170px] rounded-lg text-bg-base bg-red-base"
+                            >
                                 Delete account
                             </button>
                         </div>

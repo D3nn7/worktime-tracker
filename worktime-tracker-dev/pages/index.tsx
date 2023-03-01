@@ -18,7 +18,7 @@ export default function productPage() {
             hexColor: "#00BFA6",
         },
         {
-            category: "infrasructure",
+            category: "infrastructure",
             description: "Update dependencies",
             time: "11:05 - 12:00",
             hexColor: "#FD8180",
