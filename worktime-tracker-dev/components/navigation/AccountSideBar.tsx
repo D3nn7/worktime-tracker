@@ -24,23 +24,24 @@ export default function AccountDropdown(props: Props) {
                 JB
             </button>
             <div
-                className={`top-0 right-0 w-96 bg-[#303030] p-10 fixed h-full z-40  ease-in-out duration-300 ${showSidebar ? "translate-x-0 " : "translate-x-full"
-                    }`}
+                className={`top-0 right-0 w-96 bg-[#303030] p-10 fixed h-full z-40  ease-in-out duration-300 ${
+                    showSidebar ? "translate-x-0 " : "translate-x-full"
+                }`}
             >
                 <ul className="py-2 text-lg mt-5 w-11/12">
                     <li>
-                        <div className="block px-4 py-2 rounded-md w-full">
-                            <div className="flex flex-row place-items-center pb-3 w-full">
+                        <div className="block px-4 py-2 w-full">
+                            <div className="flex flex-row place-items-center pb-3 w-9/12">
                                 <div>
-                                <button
-                                    className="bg-orange-base   text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3"
-                                >
-                                    JB
-                                </button>
+                                    <button className="bg-orange-base   text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3">
+                                        JB
+                                    </button>
                                 </div>
-                                <div className="flex flex-col flex-wrap w-full overflow-auto">
+                                <div className="flex flex-col flex-wrap w-full">
                                     <span>Signed in as</span>
-                                    <span className="">jonasbott2@web.de</span>
+                                    <span className="w-full truncate ...">
+                                        jonasbott2@web.de
+                                    </span>
                                 </div>
                             </div>
 
