@@ -1,11 +1,58 @@
 import NavBar from "../../components/navigation/NavBarTracking";
 import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { appwrite, userState } from "../../store/global";
+import Page from "../../components/page/page";
+import ChangePassword from "../../components/account/changePassword";
+import { useRecoilState } from "recoil";
+import EnterPassword from "../../components/account/EnterPassword";
+
 
 export default function Account() {
+    const [user] = useRecoilState(userState);
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("")
+    const [loading, setLoading] = useState<boolean>(true);
+    const [userProfilePicture, setUserProfilePicture] = useState<URL | undefined>(undefined);
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+
+    const fetchData = async () => {
+            if (user !== undefined) {
+                setUserProfilePicture(appwrite.avatars.getInitials(user?.name, 200, 200));
+            }
+        }
+
+    useEffect(() => {
+        if (user !== undefined && userProfilePicture !== undefined) {
+            setName(user.name);
+            setEmail(user.email);
+            setLoading(false);
+            return;
+        }
+        fetchData();
+    }, [user, userProfilePicture]);
+
+    const handleChanges = async () => {
+        setShowPopup(true)
+    }
+
+    const saveChanges = () => {
+        if (password !== "") {
+            appwrite.account.updateEmail(email, password);
+            appwrite.account.updateName(name)
+        }
+    }
+
+    const handlePassword = (password: string) => {
+        setPassword(password);
+        saveChanges()
+    }
+
     return (
-        <div>
-            <NavBar />
-            <div className="pl-40 pt-40 pr-20 mx-auto container">
+        <Page isSecurePage={true} isLoading={loading}>
+            <div className="pl-40 pr-20 mx-auto container">
                 <div className="flex flex-row">
                     <div className="flex-initial mr-10">
                         <button
@@ -17,7 +64,7 @@ export default function Account() {
                     </div>
                     <div className="w-full">
                         <div className="pb-10">
-                            <h1 className="text-3xl pb-8">Hi Jonas Bott</h1>
+                            <h1 className="text-3xl pb-8">Hi {user?.name}</h1>
                             <form action="">
                                 <div className="flex flex-col pb-5">
                                     <label htmlFor="" className="pb-1">
@@ -26,6 +73,8 @@ export default function Account() {
                                     <input
                                         type="text"
                                         id="idName"
+                                        value={name}
+                                        onChange={(event) => setName(event.target.value)}
                                         className="bg-account-input h-10 w-account-input pl-2 rounded-md outline-none border-[1px] border-[#505358] focus:border-cyan-base"
                                     />
                                 </div>
@@ -36,6 +85,8 @@ export default function Account() {
                                     <input
                                         type="email"
                                         id="idMail"
+                                        value={email}
+                                        onChange={(event) => setEmail(event.target.value)}
                                         name="mail"
                                         className="bg-account-input h-10 w-account-input pl-2 rounded-md outline-none border-[1px] border-[#505358] focus:border-cyan-base"
                                         required
@@ -44,6 +95,7 @@ export default function Account() {
                                 <div className="flex flex-col w-20">
                                     <button
                                         type="button"
+                                        onClick={handleChanges}
                                         className="bg-cyan-base hover:bg-teal-600 focus:ring-0 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
                                     >
                                         Save
@@ -68,6 +120,7 @@ export default function Account() {
                     </div>
                 </div>
             </div>
-        </div>
+            {showPopup ? <EnterPassword closePopup={() => setShowPopup(false)} handlePassword={handlePassword} /> : null }
+        </Page>
     );
 }

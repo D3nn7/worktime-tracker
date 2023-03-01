@@ -4,8 +4,13 @@ import AccountInput from "./Input";
 export default function ResetPassword() {
     const [inputValue, setInputValue] = useState<string>("");
 
-    const getEmailResetForm = (): JSX.Element => {
-        return (
+    return (
+        <div className="flex flex-col pt-10 pr-52">
+            <span className="text-3xl">Reset your password</span>
+            <span className="text-xl pt-5">
+                Password forgotten? No problem! Just reset it. <br /> The only
+                thing we need is your email address.
+            </span>
             <form action="">
                 <div className="pt-10 flex flex-col">
                     <label htmlFor="email" className="text-md">
@@ -27,17 +32,6 @@ export default function ResetPassword() {
                     </button>
                 </div>
             </form>
-        );
-    };
-
-    return (
-        <div className="flex flex-col pt-10 pr-52">
-            <span className="text-3xl">Reset your password</span>
-            <span className="text-xl pt-5">
-                Password forgotten? No problem! Just reset it. <br /> The only
-                thing we need is your email address.
-            </span>
-            {getEmailResetForm()}
         </div>
     );
 }

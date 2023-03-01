@@ -3,9 +3,23 @@ import { useState } from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";
 import { mdiClose } from "@mdi/js";
+import { useResetRecoilState } from "recoil";
+import { appwrite, userState } from "../../store/global";
+import { useRouter } from "next/router";
 
 export default function AccountDropdown(props: Props) {
     const [showSidebar, setShowSidebar] = useState(false);
+
+    const router = useRouter();
+    const resetUserState = useResetRecoilState(userState);
+
+    const logout = async () => {
+        await appwrite.account.deleteSession('current');
+        window.localStorage.removeItem("jwt");
+        window.localStorage.removeItem("jwt_expire");
+        router.push("/account/login");
+        resetUserState();
+    }
 
     return (
         <>
@@ -66,7 +80,8 @@ export default function AccountDropdown(props: Props) {
                     </li>
                     <li>
                         <Link
-                            href={"/"}
+                            href={"/account/logout"}
+                            onClick={logout} 
                             className="block px-4 py-2 hover:bg-[#404040] rounded-md"
                         >
                             Sign out

@@ -6,8 +6,10 @@ import Image from "next/image";
 import Logo from "../../public/static/Logo.svg";
 import { useRouter } from "next/router";
 import AccountSideBar from "./AccountSideBar";
+import { useResetRecoilState } from "recoil";
+import { appwrite, userState } from "../../store/global";
 
-export default function NavBar() {
+export default function NavBarTracking() {
     const router = useRouter();
     const [navAccount, setNavAccount] = useState<string>("account");
 

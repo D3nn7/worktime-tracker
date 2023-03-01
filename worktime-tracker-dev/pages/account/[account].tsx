@@ -6,12 +6,16 @@ import { NextRequest } from "next/server";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
 import Logo from "../../public/static/Logo.svg";
+import ErrorPage from "../_error";
 
 export default function AccountDefault(req: NextRequest) {
     const router = useRouter();
 
     const checkAccount = (): JSX.Element => {
-        switch (router.query.id) {
+
+        const { account } = router.query;
+
+        switch (account) {
             case "login":
                 return <Login />;
             case "register":
@@ -21,7 +25,7 @@ export default function AccountDefault(req: NextRequest) {
             case "resetPassword":
                 return <ResetPassword />;
             default:
-                return <div>404</div>;
+                return <ErrorPage />;
         }
     };
 

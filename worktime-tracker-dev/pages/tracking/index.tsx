@@ -1,5 +1,5 @@
 import HistoryList from "../../components/history/HistoryList";
-import NavBar from "../../components/navigation/NavBarTracking";
+import Page from "../../components/page/page";
 import TrackTimes from "../../components/tracking/TrackTimes";
 import { IHistoryBoxProps } from "../../lib/types/props";
 
@@ -44,13 +44,12 @@ export default function Tracking() {
     ] as IHistoryBoxProps[];
 
     return (
-        <div>
-            <NavBar />
-            <div className="container mx-auto pt-40 pb-20 ">
+        <Page isSecurePage={true}>
+            <div>
                 <TrackTimes />
                 <div className="text-3xl pt-16">Recent tasks</div>
                 <HistoryList histories={histories} />
             </div>
-        </div>
+        </Page>
     );
 }
