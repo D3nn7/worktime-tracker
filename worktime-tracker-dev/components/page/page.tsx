@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { appwrite, userState } from "../../store/global";
 import { User } from "../../store/types";
+import { AppwriteErrorType } from "../../utils/appwrite/appwriteResponse";
 import Alert from "./alert";
 import Header from "./header";
 import Loading from "./loading";
@@ -29,7 +30,7 @@ export default function Page({ isSecurePage = false, headerEnabled = true, isLoa
                 setUser(response as unknown as User);
             } catch(error: any) {
                 if (error instanceof AppwriteException && isSecurePage) {
-                    error.type === "general_unauthorized_scope" && router.push("/account/login");
+                    error.type === AppwriteErrorType.GENERAL_UNAUTHORIZED_SCOPE && router.push("/account/login");
                 } else {
                     return(
                         <Alert message="Something wrent wrong... Please try again in a few minutes." />

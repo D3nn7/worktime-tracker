@@ -3,11 +3,11 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import Alert from "../page/alert";
-import Page from "../page/page"
+import Alert from "../../components/page/alert";
+import Page from "../../components/page/page"
 import { appwrite, userState } from "../../store/global";
 import { User } from "../../store/types";
-import { AppwriteErrorType } from "../../utils/appwriteResponse";
+import { AppwriteErrorType } from "../../utils/appwrite/appwriteResponse";
 
 export default function VerifyUser({ userId, secret} : { userId?: string, secret?: string }): JSX.Element {
 	const [user] = useRecoilState<User>(userState);
@@ -29,7 +29,7 @@ export default function VerifyUser({ userId, secret} : { userId?: string, secret
 			setVerified(true);
 		} catch(error: any) {
 			if (error instanceof AppwriteException) {
-				if(error.type === "user_invalid_token") {
+				if(error.type === AppwriteErrorType.USER_INVALID_TOKEN) {
 					setAlert("The token you using to verify your account is not valid.");
 				} else if (error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED) {
 					setAlert("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
@@ -78,7 +78,7 @@ export default function VerifyUser({ userId, secret} : { userId?: string, secret
 			</Page>
 		);
 	} else {
-		router.push("/account/overview");
+		router.push("/account");
         return <></>;
 	}
 }

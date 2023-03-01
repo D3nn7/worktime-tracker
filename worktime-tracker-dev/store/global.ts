@@ -1,16 +1,10 @@
 import { Client as Appwrite, Account, Databases, Avatars } from "appwrite";
 import { atom } from "recoil";
 import { Time, User } from "./types";
-export const Server = {
-    endpoint: process.env.APPWRITE_ENDPOINT as string,
-    project: process.env.APPWRITE_PROJECT as string,
-    collectionId: process.env.APPWRITE_COLLECTION_ID as string,
-    databaseId: process.env.APPWRITE_DATABASE_ID as string,
-};
 
 export const client = new Appwrite()
-    .setEndpoint(Server.endpoint)
-    .setProject(Server.project);
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT as string)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT as string);
 const account = new Account(client);
 const avatars = new Avatars(client);
 const database = new Databases(client);
