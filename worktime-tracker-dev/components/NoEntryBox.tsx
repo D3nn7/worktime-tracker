@@ -1,4 +1,4 @@
-import { IAccountNoCategoryBoxProps as Props } from "../lib/types/types";
+import { IAccountNoCategoryBoxProps as Props } from "../lib/types/props";
 
 export default function NoEntryBox(props: Props) {
     return (

@@ -1,4 +1,4 @@
-import { IAnalysesCategoryBoxProps as Props } from "../../lib/types/types";
+import { IAnalysesCategoryBoxProps as Props } from "../../lib/types/props";
 import Dropdown from "./Dropdown";
 import { DonutChart } from "react-circle-chart";
 

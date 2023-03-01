@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiPencilCircle, mdiClose } from "@mdi/js";
-import { IAccountCategoryBoxState as props } from "../../lib/types/types";
+import { IAccountCategoryBoxState as props } from "../../lib/types/props";
 
 interface Props {
     editCategoryVaues: props;

@@ -1,4 +1,4 @@
-import { IFeatureProps as Props } from "../../lib/types/types";
+import { IFeatureProps as Props } from "../../lib/types/props";
 import Icon from "@mdi/react";
 import { mdiCheckBold } from "@mdi/js";
 

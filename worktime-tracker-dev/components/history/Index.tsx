@@ -1,6 +1,6 @@
 import HistoryBox from "../../components/history/HistoryBox";
 import NoEntryBox from "../../components/NoEntryBox";
-import { IHistoryBoxProps } from "../../lib/types/types";
+import { IHistoryBoxProps } from "../../lib/types/props";
 
 export default function HistoryIndex(props: { histories: IHistoryBoxProps[] }) {
     return (

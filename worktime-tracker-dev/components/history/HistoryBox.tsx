@@ -1,4 +1,4 @@
-import { IHistoryBoxProps as Props } from "../../lib/types/types";
+import { IHistoryBoxProps as Props } from "../../lib/types/props";
 import Icon from "@mdi/react";
 import { mdiCircle } from "@mdi/js";
 

@@ -8,7 +8,7 @@ import EditCategoryPopup from "../components/categories/EditCategoryPopup";
 import { useState } from "react";
 import {
     IAccountCategoryBoxState as State,
-} from "../lib/types/types";
+} from "../lib/types/props";
 
 interface IEditCategory {
     index: number;

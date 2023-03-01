@@ -1,6 +1,6 @@
 import NavBar from "../../components/navigation/NavBarTracking";
 import NoTrackedTimes from "../../components/history/NoTrackedTimes";
-import { IHistoryBoxProps } from "../../lib/types/types";
+import { IHistoryBoxProps } from "../../lib/types/props";
 import HistoryIndex from "../../components/history/Index";
 
 export default function History() {

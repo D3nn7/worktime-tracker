@@ -1,4 +1,4 @@
-import { ITimeBoxProps as Props } from "../../lib/types/types";
+import { ITimeBoxProps as Props } from "../../lib/types/props";
 
 export default function TimeBox(props: Props) {
     return (

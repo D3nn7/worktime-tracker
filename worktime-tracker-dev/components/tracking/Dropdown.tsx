@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IDropdownProps as Props } from "../../lib/types/types";
+import { IDropdownProps as Props } from "../../lib/types/props";
 
 export default function Dropdown(props: Props) {
     const [selection, setSelection] = useState<string>(props.selection);

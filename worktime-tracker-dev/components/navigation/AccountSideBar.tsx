@@ -1,4 +1,4 @@
-import { IAccountDropdownProps as Props } from "../../lib/types/types";
+import { IAccountDropdownProps as Props } from "../../lib/types/props";
 import { useState } from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";

@@ -1,4 +1,4 @@
-import { IHistoryListProps as Props } from "../../lib/types/types";
+import { IHistoryListProps as Props } from "../../lib/types/props";
 import NoEntryBox from "../NoEntryBox";
 import HistoryBox from "./HistoryBox";
 

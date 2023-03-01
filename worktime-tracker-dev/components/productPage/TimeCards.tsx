@@ -1,6 +1,6 @@
 import Icon from "@mdi/react";
 import { mdiCircle } from "@mdi/js";
-import { ITimeCardProps as Props } from "../../lib/types/types";
+import { ITimeCardProps as Props } from "../../lib/types/props";
 
 export default function TimeCards(props: Props) {
     return (

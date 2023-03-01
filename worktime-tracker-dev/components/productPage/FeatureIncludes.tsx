@@ -1,6 +1,6 @@
 import Icon from "@mdi/react";
 import { mdiCheckCircle } from "@mdi/js";
-import { IFeatureProps as Props } from "../../lib/types/types";
+import { IFeatureProps as Props } from "../../lib/types/props";
 
 export default function FeatureIncludes(props: Props) {
     return (
