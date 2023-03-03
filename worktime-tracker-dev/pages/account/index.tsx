@@ -5,6 +5,7 @@ import { appwrite, userState } from "../../store/global";
 import Page from "../../components/page/page";
 import { useRecoilState } from "recoil";
 import EnterPassword from "../../components/account/EnterPassword";
+import ChangePassword from "../../components/account/ChangePassword";
 
 export default function Account() {
     const [user] = useRecoilState(userState);
@@ -12,7 +13,8 @@ export default function Account() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
-    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [showEnterPasswordPopup, setShowEnterPasswordPopup] = useState<boolean>(false);
+    const [showChangePasswordPopup, setShowChangePasswordPopup] = useState<boolean>(false);
 
     useEffect(() => {
         if (user !== undefined) {
@@ -24,7 +26,7 @@ export default function Account() {
     }, [user]);
 
     const handleChanges = async () => {
-        setShowPopup(true);
+        setShowEnterPasswordPopup(true);
     };
 
     const saveChanges = () => {
@@ -37,6 +39,10 @@ export default function Account() {
     const handlePassword = (password: string) => {
         setPassword(password);
         saveChanges();
+    };
+
+    const handleChangePassword = () => {
+        setShowChangePasswordPopup(true);
     };
 
     return (
@@ -93,10 +99,11 @@ export default function Account() {
                         </div>
                         <hr className="fill-[#303030]" />
                         <div className="pt-10 flex-row">
-                            <button className="py-2.5 px-5 bg-orange-base rounded-lg text-bg-base mr-5">
-                                <Link href="/account/resetPassword">
-                                    Change password
-                                </Link>
+                            <button
+                                onClick={handleChangePassword}
+                                className="py-2.5 px-5 bg-orange-base rounded-lg text-bg-base mr-5"
+                            >
+                                Change password
                             </button>
                             <button
                                 hidden
@@ -108,10 +115,15 @@ export default function Account() {
                     </div>
                 </div>
             </div>
-            {showPopup ? (
+            {showEnterPasswordPopup ? (
                 <EnterPassword
-                    closePopup={() => setShowPopup(false)}
+                    closePopup={() => setShowEnterPasswordPopup(false)}
                     handlePassword={handlePassword}
+                />
+            ) : null}
+            {showChangePasswordPopup ? (
+                <ChangePassword
+                    closePopup={() => setShowChangePasswordPopup(false)}
                 />
             ) : null}
         </Page>
