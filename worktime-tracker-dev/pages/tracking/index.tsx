@@ -45,7 +45,7 @@ export default function Tracking() {
 
     return (
         <Page isSecurePage={true}>
-            <div>
+            <div className="container mx-auto pt-40">
                 <TrackTimes />
                 <div className="text-3xl pt-16">Recent tasks</div>
                 <HistoryList histories={histories} />

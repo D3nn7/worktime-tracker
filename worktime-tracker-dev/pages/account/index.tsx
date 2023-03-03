@@ -8,21 +8,24 @@ import ChangePassword from "../../components/account/changePassword";
 import { useRecoilState } from "recoil";
 import EnterPassword from "../../components/account/EnterPassword";
 
-
 export default function Account() {
     const [user] = useRecoilState(userState);
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("")
+    const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
-    const [userProfilePicture, setUserProfilePicture] = useState<URL | undefined>(undefined);
+    const [userProfilePicture, setUserProfilePicture] = useState<
+        URL | undefined
+    >(undefined);
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
     const fetchData = async () => {
-            if (user !== undefined) {
-                setUserProfilePicture(appwrite.avatars.getInitials(user?.name, 200, 200));
-            }
+        if (user !== undefined) {
+            setUserProfilePicture(
+                appwrite.avatars.getInitials(user?.name, 200, 200)
+            );
         }
+    };
 
     useEffect(() => {
         if (user !== undefined && userProfilePicture !== undefined) {
@@ -35,24 +38,24 @@ export default function Account() {
     }, [user, userProfilePicture]);
 
     const handleChanges = async () => {
-        setShowPopup(true)
-    }
+        setShowPopup(true);
+    };
 
     const saveChanges = () => {
         if (password !== "") {
             appwrite.account.updateEmail(email, password);
-            appwrite.account.updateName(name)
+            appwrite.account.updateName(name);
         }
-    }
+    };
 
     const handlePassword = (password: string) => {
         setPassword(password);
-        saveChanges()
-    }
+        saveChanges();
+    };
 
     return (
         <Page isSecurePage={true} isLoading={loading}>
-            <div className="pl-40 pr-20 mx-auto container">
+            <div className="pl-40 pt-40 pr-20 mx-auto container">
                 <div className="flex flex-row">
                     <div className="flex-initial mr-10">
                         <button
@@ -74,7 +77,9 @@ export default function Account() {
                                         type="text"
                                         id="idName"
                                         value={name}
-                                        onChange={(event) => setName(event.target.value)}
+                                        onChange={(event) =>
+                                            setName(event.target.value)
+                                        }
                                         className="bg-account-input h-10 w-account-input pl-2 rounded-md outline-none border-[1px] border-[#505358] focus:border-cyan-base"
                                     />
                                 </div>
@@ -86,7 +91,9 @@ export default function Account() {
                                         type="email"
                                         id="idMail"
                                         value={email}
-                                        onChange={(event) => setEmail(event.target.value)}
+                                        onChange={(event) =>
+                                            setEmail(event.target.value)
+                                        }
                                         name="mail"
                                         className="bg-account-input h-10 w-account-input pl-2 rounded-md outline-none border-[1px] border-[#505358] focus:border-cyan-base"
                                         required
@@ -120,7 +127,12 @@ export default function Account() {
                     </div>
                 </div>
             </div>
-            {showPopup ? <EnterPassword closePopup={() => setShowPopup(false)} handlePassword={handlePassword} /> : null }
+            {showPopup ? (
+                <EnterPassword
+                    closePopup={() => setShowPopup(false)}
+                    handlePassword={handlePassword}
+                />
+            ) : null}
         </Page>
     );
 }
