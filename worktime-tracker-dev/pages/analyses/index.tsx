@@ -1,11 +1,11 @@
 import NavBar from "../../components/navigation/NavBarTracking";
 import TimeBox from "../../components/analyses/TimeBox";
 import CategoryBox from "../../components/analyses/CategoryBox";
+import Page from "../../components/page/page";
 
 export default function Analyses() {
     return (
-        <div>
-            <NavBar />
+        <Page isSecurePage>
             <div className="container mx-auto pt-40">
                 <div className="text-3xl">Analyses</div>
                 <div className="flex flex-row pt-10">
@@ -27,6 +27,6 @@ export default function Analyses() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Page>
     );
 }
