@@ -6,9 +6,8 @@ import NoEntryBox from "../components/NoEntryBox";
 import AddCategoryPopup from "../components/categories/AddCategoryPopup";
 import EditCategoryPopup from "../components/categories/EditCategoryPopup";
 import { useState } from "react";
-import {
-    IAccountCategoryBoxState as State,
-} from "../lib/types/props";
+import { IAccountCategoryBoxState as State } from "../lib/types/props";
+import Page from "../components/page/page";
 
 interface IEditCategory {
     index: number;
@@ -65,8 +64,7 @@ export default function Categories() {
     };
 
     return (
-        <div>
-            <NavBar />
+        <Page isSecurePage>
             <div className="container mx-auto pt-40 pb-20">
                 <div className="pb-20 ">
                     <div className="text-3xl float-left">Categories</div>
@@ -127,6 +125,6 @@ export default function Categories() {
                     editCategory={addEditedCategory}
                 />
             )}
-        </div>
+        </Page>
     );
 }
