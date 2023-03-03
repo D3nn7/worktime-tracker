@@ -3,15 +3,17 @@ import { useState } from "react";
 import Link from "next/link";
 import Icon from "@mdi/react";
 import { mdiClose } from "@mdi/js";
-import { useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { appwrite, userState } from "../../store/global";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function AccountDropdown(props: Props) {
     const [showSidebar, setShowSidebar] = useState(false);
 
     const router = useRouter();
     const resetUserState = useResetRecoilState(userState);
+    const user = useRecoilValue(userState);
 
     const logout = async () => {
         await appwrite.account.deleteSession('current');
@@ -31,12 +33,13 @@ export default function AccountDropdown(props: Props) {
                     <Icon path={mdiClose} size={1.5} />
                 </button>
             )}
-            <button
-                onClick={() => setShowSidebar(!showSidebar)}
-                className="bg-orange-base  hover:bg-orange-300 text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0"
-            >
-                JB
-            </button>
+            <Image 
+               onClick={() => setShowSidebar(!showSidebar)}
+                className="rounded-md h-11 w-auto hover:opacity-80" 
+                src={user?.profilePicture.href as unknown as string} 
+                alt={"Profile picture"} 
+                width={100} 
+                height={100} />
             <div
                 className={`top-0 right-0 w-96 bg-[#303030] p-10 fixed h-full z-40  ease-in-out duration-300 ${
                     showSidebar ? "translate-x-0 " : "translate-x-full"
@@ -46,15 +49,13 @@ export default function AccountDropdown(props: Props) {
                     <li>
                         <div className="block px-4 py-2 w-full">
                             <div className="flex flex-row place-items-center pb-3 w-9/12">
-                                <div>
-                                    <button className="bg-orange-base   text-black focus:outline-none focus:border-spacing-0 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3">
-                                        JB
-                                    </button>
+                                <div className="pr-2">
+                                    <Image className="rounded-md" src={user?.profilePicture.href as unknown as string} alt={"Profile picture"} width={200} height={200} />
                                 </div>
                                 <div className="flex flex-col flex-wrap w-full">
                                     <span>Signed in as</span>
                                     <span className="w-full truncate ...">
-                                        jonasbott2@web.de
+                                            {user.name}
                                     </span>
                                 </div>
                             </div>

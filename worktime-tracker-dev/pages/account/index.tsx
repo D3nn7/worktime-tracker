@@ -1,10 +1,8 @@
-import NavBar from "../../components/navigation/NavBarTracking";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { appwrite, userState } from "../../store/global";
 import Page from "../../components/page/page";
-import ChangePassword from "../../components/account/changePassword";
 import { useRecoilState } from "recoil";
 import EnterPassword from "../../components/account/EnterPassword";
 
@@ -14,28 +12,16 @@ export default function Account() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
-    const [userProfilePicture, setUserProfilePicture] = useState<
-        URL | undefined
-    >(undefined);
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
-    const fetchData = async () => {
-        if (user !== undefined) {
-            setUserProfilePicture(
-                appwrite.avatars.getInitials(user?.name, 200, 200)
-            );
-        }
-    };
-
     useEffect(() => {
-        if (user !== undefined && userProfilePicture !== undefined) {
+        if (user !== undefined) {
             setName(user.name);
             setEmail(user.email);
             setLoading(false);
             return;
         }
-        fetchData();
-    }, [user, userProfilePicture]);
+    }, [user]);
 
     const handleChanges = async () => {
         setShowPopup(true);
@@ -58,12 +44,7 @@ export default function Account() {
             <div className="pl-40 pt-40 pr-20 mx-auto container">
                 <div className="flex flex-row">
                     <div className="flex-initial mr-10">
-                        <button
-                            type="button"
-                            className="bg-orange-base hover:bg-orange-300 text-bg-base text-5xl rounded-lg p-6 text-center mr-3 md:mr-0"
-                        >
-                            JB
-                        </button>
+                        <Image className="rounded-lg" src={user?.profilePicture.href as unknown as string} alt={"Profile picture"} width={200} height={200} />
                     </div>
                     <div className="w-full">
                         <div className="pb-10">

@@ -1,4 +1,5 @@
 import type { Client as Appwrite } from "appwrite";
+import { URL } from "url";
 
 type Time = {
     id: string;
@@ -24,6 +25,7 @@ type User = {
     email: string;
     name: string;
     emailVerification: boolean;
+    profilePicture: URL;
     registration: string;
     preferences?: any;
 };

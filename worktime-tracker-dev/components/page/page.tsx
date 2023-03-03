@@ -1,4 +1,4 @@
-import { AppwriteException } from "appwrite";
+import { AppwriteException, Models } from "appwrite";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -27,30 +27,34 @@ export default function Page({
 
     const router = useRouter();
 
+    const fetchData = async () => {
+        try {
+            const user: User = await appwrite.account.get() as unknown as User;
+            const profilePicture: URL = appwrite.avatars.getInitials(user.name, 200, 200)
+            user.profilePicture = profilePicture;
+            setUser(user);
+        } catch (error: any) {
+            if (error instanceof AppwriteException && isSecurePage) {
+                error.type ===
+                    AppwriteErrorType.GENERAL_UNAUTHORIZED_SCOPE &&
+                    router.push("/account/login");
+            } else {
+                return (
+                    <Alert message="Something wrent wrong... Please try again in a few minutes." />
+                );
+            }
+        }
+    };
+
     useEffect(() => {
         if (user || !isSecurePage) {
             if (!isLoading) {
                 setLoading(false);
             }
+            
             return;
         }
 
-        const fetchData = async () => {
-            try {
-                const response = await appwrite.account.get();
-                setUser(response as unknown as User);
-            } catch (error: any) {
-                if (error instanceof AppwriteException && isSecurePage) {
-                    error.type ===
-                        AppwriteErrorType.GENERAL_UNAUTHORIZED_SCOPE &&
-                        router.push("/account/login");
-                } else {
-                    return (
-                        <Alert message="Something wrent wrong... Please try again in a few minutes." />
-                    );
-                }
-            }
-        };
         fetchData();
     }, [
         user,
@@ -68,9 +72,11 @@ export default function Page({
         ) {
             isLoading = true;
             router.push("/account/verify");
-        } else if (isBlacklistedWhenLoggedIn) {
+        } 
+        
+        if (isBlacklistedWhenLoggedIn) {
             isLoading = true;
-            router.push("/account");
+            router.push("/tracking");
         }
     }
 

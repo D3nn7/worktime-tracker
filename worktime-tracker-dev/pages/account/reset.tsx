@@ -1,10 +1,13 @@
 import { AppwriteException } from "appwrite";
 import { GetServerSideProps } from "next";
+import AccountInput from "../../components/account/Input";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import Alert from "../../components/page/alert";
 import Page from "../../components/page/page"
+import Logo from "../../public/static/Logo.svg";
 import { appwrite } from "../../store/global";
+import Image from "next/image";
 
 export default function ResetUser({ userId, secret, expire } : { userId?: string, secret?: string, expire?: string }) {    
     const [alert, setAlert] = useState<string>("");
@@ -18,7 +21,7 @@ export default function ResetUser({ userId, secret, expire } : { userId?: string
     const resetPassword = async (event: FormEvent<EventTarget>) => {
         event.preventDefault();
         try {
-            await appwrite.account.createRecovery(email, process.env.PROJECT_URL + "/account/reset");
+            await appwrite.account.createRecovery(email, process.env.NEXT_PUBLIC_PROJECT_URL + "/account/reset");
             setAlert("Email was send to " + email + ". Please check your inbox and follow the instructions.")
         } catch (error : any) {
             setAlert(error.message);
@@ -46,58 +49,96 @@ export default function ResetUser({ userId, secret, expire } : { userId?: string
 
     if (!resetProcess) {
         return (
-            <Page isBlacklistedWhenLoggedIn={true}>
+            <Page isBlacklistedWhenLoggedIn={true} headerEnabled={false}>
                 {alert && <Alert message={alert} />}
-                <p>Recover you account.</p>
-
-                <form onSubmit={resetPassword}>
-                    <label htmlFor="email"> Email</label>
-                    <input
-                        id="email"
-                        type="email"
-                        required={true}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <button
-
-                        type="submit"
-                        disabled={!email}
-                    >
-                        Send restore email
-                    </button>
-                </form>
+                <div className="bg-gradient-to-b from-cyan-base to-green-base">
+			        <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
+				        <div className="flex flex-row space-x-5">
+                            <Image src={Logo} alt="Logo" width={30} height={30} />
+                            <span className="text-2xl">Worktime Tracker</span>
+                        </div>
+                        <div className="flex flex-col pt-10 pr-52">
+                            <span className="text-3xl">Reset your password</span>
+                            <span className="text-xl pt-5">
+                                Password forgotten? No problem! Just reset it. <br /> The only
+                                thing we need is your email address.
+                            </span>
+                            <form onSubmit={resetPassword}>
+                                <div className="pt-10 flex flex-col">
+                                    <label htmlFor="email" className="text-md">
+                                        E-Mail
+                                    </label>
+                                    <AccountInput
+                                        inputType={"email"}
+                                        inputValue={email}
+                                        setInputValue={setEmail}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className="pt-10">
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2  bg-cyan-base rounded-md text-white"
+                                    >
+                                        Reset password now
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </Page>
         );
     } else {
         return (
-            <Page isBlacklistedWhenLoggedIn={true}>
+            <Page isBlacklistedWhenLoggedIn={true} headerEnabled={false}>
                 {alert && <Alert message={alert} />}
-                <p>One step ahead to recover your account. You need to set a new password</p>
-
-                <form onSubmit={changePassword}>
-                    <label htmlFor="newPassword"> New password</label>
-                    <input
-                        id="newPassword"
-                        type="password"
-                        required={true}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <label htmlFor="repeatNewPassword"> Repeat new password</label>
-                    <input
-                        id="repeatNewPassword"
-                        type="password"
-                        required={true}
-                        onChange={(e) => setPasswordRepeat(e.target.value)}
-                    />
-                    <button
-
-                        type="submit"
-                        disabled={!password && !passwordRepeat && password !== passwordRepeat}
-                    >
-                        Change password
-                    </button>
-                </form>
+                <div className="bg-gradient-to-b from-cyan-base to-green-base">
+			        <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
+				        <div className="flex flex-row space-x-5">
+                            <Image src={Logo} alt="Logo" width={30} height={30} />
+                            <span className="text-2xl">Worktime Tracker</span>
+                        </div>
+                        <div className="flex flex-col pt-10 pr-52">
+                            <span className="text-3xl">Reset is progress</span>
+                            <span className="text-xl pt-5">
+                                One step ahead to recover your account. You need to set a new password
+                            </span>
+                            <form onSubmit={changePassword}>
+                                <div className="pt-10 flex flex-col">
+                                    <label htmlFor="email" className="text-md">
+                                        New password
+                                    </label>
+                                    <AccountInput
+                                        inputType={"password"}
+                                        inputValue={password}
+                                        setInputValue={setPassword}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className="pt-10 flex flex-col">
+                                    <label htmlFor="email" className="text-md">
+                                        Reenter new password
+                                    </label>
+                                    <AccountInput
+                                        inputType={"password"}
+                                        inputValue={passwordRepeat}
+                                        setInputValue={setPasswordRepeat}
+                                        required={true}
+                                    />
+                                </div>
+                                <div className="pt-10">
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2 bg-cyan-base rounded-md text-white"
+                                    >
+                                        Reset password now
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </Page>
         );
     }

@@ -64,6 +64,9 @@ export default function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
+                <div className="pt-5">
+                    <span className="text-md text-white">forgot password? <Link className="text-color-reg-now" href={'./reset'}>recover here</Link>.</span>
+                </div>
                 <div className="pt-10">
                     <button
                         type="submit"

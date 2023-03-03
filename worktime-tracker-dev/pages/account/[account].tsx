@@ -1,7 +1,5 @@
 import Register from "../../components/account/Register";
 import Login from "../../components/account/Login";
-import Verify from "../../components/account/Verify";
-import ResetPassword from "../../components/account/ResetPassword";
 import { NextRequest } from "next/server";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
@@ -20,10 +18,6 @@ export default function AccountDefault(req: NextRequest) {
                 return <Login />;
             case "register":
                 return <Register />;
-            case "verify":
-                return <Verify />;
-            case "resetPassword":
-                return <ResetPassword />;
             default:
                 return <ErrorPage />;
         }
