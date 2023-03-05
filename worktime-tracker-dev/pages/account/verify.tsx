@@ -15,6 +15,7 @@ export default function VerifyUser({ userId, secret }: { userId?: string, secret
     const [user] = useRecoilState<User>(userState);
     const [verified, setVerified] = useState<boolean>(false);
     const [verificationSend, setVerificationSend] = useState<boolean>(false);
+    const [verificationRequested, setVerificationRequested] = useState<boolean>(false);
     const resetUserState = useResetRecoilState(userState);
 
     const router = useRouter();
@@ -27,35 +28,35 @@ export default function VerifyUser({ userId, secret }: { userId?: string, secret
         resetUserState();
     }
 
-
-    useEffect(() => {
-        if (userId && secret && !verified) {
-            verifyAccount();
-        }
-    }), [verified];
-
-    const verifyAccount = async () => {
-        try {
-            await appwrite.account.updateVerification(
-                userId as string,
-                secret as string
-            );
-            setVerified(true);
-            toast.success("Your account has been verified. You can now login.");
-        } catch (error: any) {
-            if (error instanceof AppwriteException) {
-                if (error.type === AppwriteErrorType.USER_INVALID_TOKEN) {
-                    toast.error("The token you using to verify your account is not valid.");
-                } else if (
-                    error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED
-                ) {
-                    toast.error("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
+    async function verifyAccount() {
+        if (userId && secret && !verified && !verificationRequested) {
+            try {
+                setVerificationRequested(true);
+                await appwrite.account.updateVerification(
+                    userId as string,
+                    secret as string
+                );
+                setVerified(true);
+                toast.success("Your account has been verified. You can now login.");
+            } catch (error: any) {
+                if (error instanceof AppwriteException) {
+                    if (error.type === AppwriteErrorType.USER_INVALID_TOKEN) {
+                        toast.error("The token you using to verify your account is not valid.");
+                    } else if (
+                        error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED
+                    ) {
+                        toast.error("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
+                    }
+                } else {
+                    toast.error("Something went wrong... Please try again in a few minutes.");
                 }
-            } else {
-                toast.error("Something went wrong... Please try again in a few minutes.");
             }
         }
     };
+
+    useEffect(() => {
+        verifyAccount();
+    }, []);
 
     const sendVerification = async () => {
         await appwrite.account.createVerification(
@@ -64,7 +65,28 @@ export default function VerifyUser({ userId, secret }: { userId?: string, secret
         setVerificationSend(true);
     };
 
-    if (!user?.emailVerification) {
+    if (verified) {
+        return (
+            <Page isSecurePage={true} headerEnabled={false}>
+                <Component
+                    title={"Verified 🎉"}
+                    text={`Thank you for verifying your email adress.`}
+                    text2Component={<span>You can now use your account.</span>}
+                    linkComponent={
+                        <span>
+                            <a
+                                onClick={() => logout()}
+                                className="text-color-reg-now"
+                            >
+                                Login now
+                            </a>
+                            .{" "}
+                        </span>
+                    }
+                />
+            </Page>
+        );
+    } else if (!user?.emailVerification) {
         if (!verificationSend) {
             return (
                 <Page isSecurePage={true} headerEnabled={false}>
@@ -122,27 +144,6 @@ export default function VerifyUser({ userId, secret }: { userId?: string, secret
                 </Page>
             );
         }
-    } else if (verified) {
-        return (
-            <Page isSecurePage={true} headerEnabled={false}>
-                <Component
-                    title={"Verified 🎉"}
-                    text={`Thank you for verifying your email adress.`}
-                    text2Component={<span>You can now use your account.</span>}
-                    linkComponent={
-                        <span>
-                            <a
-                                onClick={() => logout()}
-                                className="text-color-reg-now"
-                            >
-                                Login now
-                            </a>
-                            .{" "}
-                        </span>
-                    }
-                />
-            </Page>
-        );
     } else {
         router.push("/account");
         return <></>;
