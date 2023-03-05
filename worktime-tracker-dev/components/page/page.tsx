@@ -5,9 +5,9 @@ import { useRecoilState } from "recoil";
 import { appwrite, userState } from "../../store/global";
 import { User } from "../../store/types";
 import { AppwriteErrorType } from "../../utils/appwrite/appwriteResponse";
-import Alert from "./alert";
 import Header from "./header";
 import Loading from "../Loading";
+import { Toaster, toast } from "sonner";
 
 export default function Page({
     isSecurePage = false,
@@ -39,9 +39,7 @@ export default function Page({
                     AppwriteErrorType.GENERAL_UNAUTHORIZED_SCOPE &&
                     router.push("/account/login");
             } else {
-                return (
-                    <Alert message="Something wrent wrong... Please try again in a few minutes." />
-                );
+                toast.error("Something went wrong... Please try again in a few minutes.");
             }
         }
     };
@@ -66,10 +64,7 @@ export default function Page({
     ]);
 
     if (user) {
-        if (
-            user.emailVerification === false &&
-            router.asPath !== "/account/verify"
-        ) {
+        if (user.emailVerification === false && router.asPath !== "/account/verify") {
             isLoading = true;
             router.push("/account/verify");
         } 
@@ -89,6 +84,7 @@ export default function Page({
                     <Header isUserLoggedIn={user ? true : false} />
                 )}
                 {children}
+                <Toaster theme="dark" position="top-center" closeButton  />
             </>
         );
     }

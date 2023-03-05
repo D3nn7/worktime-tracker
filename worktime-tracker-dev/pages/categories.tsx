@@ -106,7 +106,6 @@ export default function Categories() {
                           ))
                         : null}
                     <NoEntryBox
-                        id="1"
                         category="Something missing?"
                         description="add more categories to manage the tiimes more accurately"
                     />

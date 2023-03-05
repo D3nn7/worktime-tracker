@@ -3,14 +3,13 @@ import { GetServerSideProps } from "next";
 import AccountInput from "../../components/account/Input";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
-import Alert from "../../components/page/alert";
 import Page from "../../components/page/page"
 import Logo from "../../public/static/Logo.svg";
 import { appwrite } from "../../store/global";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function ResetUser({ userId, secret, expire } : { userId?: string, secret?: string, expire?: string }) {    
-    const [alert, setAlert] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordRepeat, setPasswordRepeat] = useState<string>("");
@@ -22,9 +21,9 @@ export default function ResetUser({ userId, secret, expire } : { userId?: string
         event.preventDefault();
         try {
             await appwrite.account.createRecovery(email, process.env.NEXT_PUBLIC_PROJECT_URL + "/account/reset");
-            setAlert("Email was send to " + email + ". Please check your inbox and follow the instructions.")
+            toast.message("Email was send to " + email + ". Please check your inbox and follow the instructions.");
         } catch (error : any) {
-            setAlert(error.message);
+            toast.error(error.message);
         }
     }
 
@@ -32,11 +31,11 @@ export default function ResetUser({ userId, secret, expire } : { userId?: string
         event.preventDefault();
         try {
             await appwrite.account.updateRecovery(userId as string, secret as string, password, passwordRepeat);
-            setAlert("Password was changed. You can now login with your new password.");
+            toast.success("Password was changed. You can now login with your new password.");
             router.push("/account/login");
         } catch (error: any) {
             if (error instanceof AppwriteException) {
-                setAlert(error.message);
+                toast.error(error.message);
             }
         }
     }
@@ -50,7 +49,6 @@ export default function ResetUser({ userId, secret, expire } : { userId?: string
     if (!resetProcess) {
         return (
             <Page isBlacklistedWhenLoggedIn={true} headerEnabled={false}>
-                {alert && <Alert message={alert} />}
                 <div className="bg-gradient-to-b from-cyan-base to-green-base">
 			        <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
 				        <div className="flex flex-row space-x-5">
@@ -92,7 +90,6 @@ export default function ResetUser({ userId, secret, expire } : { userId?: string
     } else {
         return (
             <Page isBlacklistedWhenLoggedIn={true} headerEnabled={false}>
-                {alert && <Alert message={alert} />}
                 <div className="bg-gradient-to-b from-cyan-base to-green-base">
 			        <div className="bg-bg-base w-3/5 pt-32 pl-16 h-screen">
 				        <div className="flex flex-row space-x-5">

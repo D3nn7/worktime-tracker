@@ -16,7 +16,8 @@ export default function Track() {
 
         const time: ITime = {
             userId: user.$id,
-            startDate: new Date(),
+            name: "",
+            startDate: new Date().toString(),
             calculatedTimeInMinutes: 0,
             categoryId: "debugger test"
         };

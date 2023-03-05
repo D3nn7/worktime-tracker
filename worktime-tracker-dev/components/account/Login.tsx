@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 import { appwrite } from "../../store/global";
+import Page from "../page/page";
 
 export default function Login() {
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [alert, setAlert] = useState<string>("");
     const router = useRouter();
 
     const login = async (event: FormEvent<EventTarget>) => {
@@ -16,12 +17,12 @@ export default function Login() {
             await appwrite.account.createEmailSession(email, password);
             router.push("/account");
         } catch (error : any) {
-            setAlert(error.message);
+            toast.error(error.message);
         }
     }
 
     return (
-        <>
+        <Page isBlacklistedWhenLoggedIn headerEnabled={false}>
             <div className="pt-10">
                 <span className="text-xl">Sign in to your account</span>
             </div>
@@ -76,6 +77,6 @@ export default function Login() {
                     </button>
                 </div>
             </form>
-        </>
+        </Page>
     );
 }

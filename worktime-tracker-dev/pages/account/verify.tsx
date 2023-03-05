@@ -3,33 +3,36 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import Alert from "../../components/page/alert";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { toast } from "sonner";
 import Page from "../../components/page/page";
 import Logo from "../../public/static/Logo.svg";
 import { appwrite, userState } from "../../store/global";
 import { User } from "../../store/types";
 import { AppwriteErrorType } from "../../utils/appwrite/appwriteResponse";
 
-export default function VerifyUser({
-    userId,
-    secret,
-}: {
-    userId?: string;
-    secret?: string;
-}): JSX.Element {
+export default function VerifyUser({ userId, secret }: { userId?: string, secret?: string }): JSX.Element {
     const [user] = useRecoilState<User>(userState);
     const [verified, setVerified] = useState<boolean>(false);
-    const [alert, setAlert] = useState<string>("");
     const [verificationSend, setVerificationSend] = useState<boolean>(false);
+    const resetUserState = useResetRecoilState(userState);
 
     const router = useRouter();
+
+    const logout = async () => {
+        await appwrite.account.deleteSession('current');
+        window.localStorage.removeItem("jwt");
+        window.localStorage.removeItem("jwt_expire");
+        router.push("/account/login");
+        resetUserState();
+    }
+
 
     useEffect(() => {
         if (userId && secret && !verified) {
             verifyAccount();
         }
-    });
+    }), [verified];
 
     const verifyAccount = async () => {
         try {
@@ -38,21 +41,18 @@ export default function VerifyUser({
                 secret as string
             );
             setVerified(true);
+            toast.success("Your account has been verified. You can now login.");
         } catch (error: any) {
             if (error instanceof AppwriteException) {
                 if (error.type === AppwriteErrorType.USER_INVALID_TOKEN) {
-                    setAlert(
-                        "The token you using to verify your account is not valid."
-                    );
+                    toast.error("The token you using to verify your account is not valid.");
                 } else if (
                     error.type === AppwriteErrorType.GENERAL_RATE_LIMIT_EXCEEDED
                 ) {
-                    setAlert(
-                        "You exceed the rate limit to verify. Please wait 10 minutes and try again."
-                    );
+                    toast.error("You exceed the rate limit to verify. Please wait 10 minutes and try again.");
                 }
             } else {
-                setAlert("Something wrent wrong...");
+                toast.error("Something went wrong... Please try again in a few minutes.");
             }
         }
     };
@@ -68,7 +68,6 @@ export default function VerifyUser({
         if (!verificationSend) {
             return (
                 <Page isSecurePage={true} headerEnabled={false}>
-                    {alert && <Alert message={alert} />}
                     <Component
                         title={"Account Created 🎉"}
                         text={
@@ -97,8 +96,7 @@ export default function VerifyUser({
             );
         } else {
             return (
-                <Page isSecurePage={true}>
-                    {alert && <Alert message={alert} />}
+                <Page isSecurePage={true} headerEnabled={false}>
                     <Component
                         title={"Verification sent"}
                         text={`We sent a verification mail to ${user?.email}`}
@@ -126,20 +124,18 @@ export default function VerifyUser({
         }
     } else if (verified) {
         return (
-            <Page isSecurePage={true}>
-                {alert && <Alert message={alert} />}
+            <Page isSecurePage={true} headerEnabled={false}>
                 <Component
                     title={"Verified 🎉"}
                     text={`Thank you for verifying your email adress.`}
                     text2Component={<span>You can now use your account.</span>}
                     linkComponent={
                         <span>
-                            Go to
                             <a
-                                onClick={() => router.push("/account/overview")}
+                                onClick={() => logout()}
                                 className="text-color-reg-now"
                             >
-                                account page
+                                Login now
                             </a>
                             .{" "}
                         </span>

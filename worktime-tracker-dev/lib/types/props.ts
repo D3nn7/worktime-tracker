@@ -26,7 +26,6 @@ export interface IAccountCategoryBoxState {
     description: string;
 }
 export interface IAccountNoCategoryBoxProps {
-    id: string;
     category: string;
     description: string;
 }

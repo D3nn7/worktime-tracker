@@ -15,11 +15,6 @@ type Category = {
     color: string;
 }
 
-type Alert = {
-    color: "red";
-    message: string;
-};
-
 type User = {
     $id: string;
     email: string;
@@ -39,7 +34,6 @@ type State = {
 export type {
     Time,
     Category,
-    Alert,
     User,
     State
 }

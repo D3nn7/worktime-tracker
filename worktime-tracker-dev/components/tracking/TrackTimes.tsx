@@ -3,7 +3,8 @@ import { mdiPlay, mdiStopCircle } from "@mdi/js";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import { useStopwatch } from "react-timer-hook";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
+import { useSetRecoilState } from "recoil";
 
 
 export default function TrackTimes() {
@@ -46,7 +47,14 @@ export default function TrackTimes() {
         if (inputValue !== "" && select !== "Select a category") {
             startTracking();
         } else {
-            toast.error("Please fill in all fields");
+            toast.error("Please fill in all fields", {
+                style: {
+                    background: '#FD8180',
+                    borderColor: '#ff6968',
+                },
+                //className: 'bg-red-base',
+                description: 'Monday, January 3rd at 6:00pm',
+              });
         }
     };
 
@@ -108,7 +116,6 @@ export default function TrackTimes() {
                     </div>
                 ) : null}
             </div>
-            <Toaster richColors theme="dark" position="top-center" closeButton  />
         </div>
     );
 }
