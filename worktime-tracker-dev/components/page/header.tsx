@@ -2,38 +2,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useResetRecoilState } from "recoil";
 import { appwrite, userState } from "../../store/global";
+import NavBarPage from "../navigation/NavBarProductPage";
+import NavBarTracking from "../navigation/NavBarTracking";
 
 export default function Header({ isUserLoggedIn }: { isUserLoggedIn: boolean }) {
-    const router = useRouter();
-    const resetUserState = useResetRecoilState(userState);
-
-    const logout = async () => {
-        await appwrite.account.deleteSession('current');
-        window.localStorage.removeItem("jwt");
-        window.localStorage.removeItem("jwt_expire");
-        router.push("/account/login");
-        resetUserState();
-    }
-
     if (isUserLoggedIn) {
         return (
-            <div>
-                <h1>Worktime Tracker</h1>
-                <button onClick={logout}>Logout</button>
-                <Link href="/account">Account Overview</Link>
-            </div>
+            <NavBarTracking />
         );
     } else {
         return (
-            <div>
-                <h1>Worktime Tracker</h1>
-                <Link href="/account/login">
-                    Login
-                </Link>
-                <Link href="/account/register">
-                    Sign Up
-                </Link>
-            </div>
+            <NavBarPage />
         );
     }
 }
