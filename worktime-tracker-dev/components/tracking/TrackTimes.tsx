@@ -4,10 +4,17 @@ import { useState } from "react";
 import Dropdown from "./Dropdown";
 import { useStopwatch } from "react-timer-hook";
 import { toast } from "sonner";
-import { useSetRecoilState } from "recoil";
+import { getJWT } from "../../utils/jwt";
+import { ITime } from "../../lib/types/types";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../store/global";
 
 
 export default function TrackTimes() {
+    const user = useRecoilValue(userState);
+
+    const [track, setTrack] = useState<ITime>();
+
     const [inputValue, setInputValue] = useState<string>("");
     const [isTracking, setIsTracking] = useState<boolean>(false);
     const [select, setSelect] = useState<string>("Select a category");
@@ -47,25 +54,62 @@ export default function TrackTimes() {
         if (inputValue !== "" && select !== "Select a category") {
             startTracking();
         } else {
-            toast.error("Please fill in all fields", {
-                style: {
-                    background: '#FD8180',
-                    borderColor: '#ff6968',
-                },
-                //className: 'bg-red-base',
-                description: 'Monday, January 3rd at 6:00pm',
-              });
+            toast.error("Please fill in all fields");
         }
     };
 
-    const startTracking = () => {
-        start();
-        setIsTracking(true);
+    const startTracking = async() => {
+        const timeObject: ITime = {
+            userId: user.$id,
+            name: inputValue,
+            startDate: new Date().toISOString(),
+            calculatedTimeInMs: 0,
+            categoryId: select,
+        };
+
+        const jwt = await getJWT();
+        const res = await fetch('/api/times/add', {
+            method: 'post',
+            headers: {
+                JWT: jwt
+            },
+            body: JSON.stringify(timeObject)
+        }).then((res) => res.json());
+
+        if (res.status !== 200) {
+            toast.error("Something went wrong", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            start();
+            setIsTracking(true);
+            setTrack(res.data as ITime);
+        }
     };
 
-    const stopTracking = () => {
-        pause();
-        setIsTracking(false);
+    const stopTracking = async() => {
+        const timeObject: ITime = track as ITime;
+        timeObject.endDate = new Date().toISOString();
+        timeObject.calculatedTimeInMs = (Date.parse(timeObject.endDate) - Date.parse(timeObject.startDate));
+
+        const jwt = await getJWT();
+
+        const res = await fetch(`/api/times/edit`, {
+            method: 'post',
+            headers: {
+                JWT: jwt
+            },
+            body: JSON.stringify(timeObject)
+        });
+
+        if (res.status !== 200) {
+            toast.error("Something went wrong", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            pause();
+            setIsTracking(false);
+        }
     };
 
     const resetTracking = () => {

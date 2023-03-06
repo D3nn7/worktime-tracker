@@ -1,4 +1,6 @@
 export function convertAppwriteResponseToType<Type>({response} : {response: any}): Type {
+    response as unknown;
+
     response.id = response.$id;
     delete response.$id;
     delete response.$permissions;

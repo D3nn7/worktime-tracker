@@ -11,12 +11,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       appwrite.database.client.setJWT(jwt as string);
 
-      console.log(time)
+      const timeId: string = time.id as string;
+      delete time.id;
 
       await appwrite.database.updateDocument(
         process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
-        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string,
-        time.$id as string,
+        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_TIMES as string,
+        timeId,
         time
       ).then((response) => {
         res.status(200).json({status: 200, dateTime: new Date(), message: "success", data: response as unknown as ITime[]} as unknown as IApiResponse)

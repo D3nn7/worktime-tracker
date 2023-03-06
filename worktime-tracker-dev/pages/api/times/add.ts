@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { IApiResponse, ITime } from "../../../lib/types/types";
 import { appwrite } from "../../../store/global";
 import { Permission, Role } from "appwrite";
+import { convertAppwriteResponseToType } from "../../../utils/appwrite/appwriteHelper";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
@@ -36,8 +37,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       }
 
-      if (time.calculatedTimeInMinutes === undefined) {
-        res.status(400).json({status: 400, dateTime: new Date(), message: "CalculatedTimeInMinutes not set."} as IApiResponse);
+      if (time.calculatedTimeInMs === undefined) {
+        res.status(400).json({status: 400, dateTime: new Date(), message: "CalculatedTimeInMss not set."} as IApiResponse);
         return;
       }
 
@@ -51,7 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       appwrite.database.client.setJWT(jwt as string);
       await appwrite.database.createDocument(
         process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string, 
-        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string, 
+        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_TIMES as string, 
         uuidv4(), 
         time, 
         [
@@ -60,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           Permission.delete(Role.user(time.userId, 'verified')),
         ]
       ).then((response) => {
-        res.status(200).json({status: 200, dateTime: new Date(), message: "success", data: response as unknown as ITime} as unknown as IApiResponse)
+        res.status(200).json({status: 200, dateTime: new Date(), message: "success", data: convertAppwriteResponseToType<ITime>({response: response})} as unknown as IApiResponse)
       });
     } catch(error: any) {
       res.status(500).json({status: 500, dateTime: new Date(), message: error.message} as IApiResponse)

@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string,
         req.query.get as string,
       ).then((response) => {
-        res.status(200).json({status: 200, dateTime: new Date(), message: "success", data: convertAppwriteResponseToType<ITime>(response as unknown)} as unknown as IApiResponse)
+        res.status(200).json({status: 200, dateTime: new Date(), message: "success", data: convertAppwriteResponseToType<ITime>(response as unknown as any)} as unknown as IApiResponse)
       });
     } catch(error: any) {
       res.status(500).json({status: 500, dateTime: new Date(), message: error.message} as IApiResponse)
