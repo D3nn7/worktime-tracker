@@ -11,11 +11,6 @@ const database = new Databases(client);
 
 export const appwrite = { account, database, avatars };
 
-export const todoState = atom<Time[]>({
-    key: "times",
-    default: [],
-});
-
 export const userState = atom<User>({
     key: "user",
     default: undefined,

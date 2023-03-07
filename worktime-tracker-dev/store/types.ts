@@ -1,4 +1,5 @@
 import type { Client as Appwrite } from "appwrite";
+import { URL } from "url";
 
 type Time = {
     id: string;
@@ -14,16 +15,12 @@ type Category = {
     color: string;
 }
 
-type Alert = {
-    color: "red";
-    message: string;
-};
-
 type User = {
     $id: string;
     email: string;
     name: string;
     emailVerification: boolean;
+    profilePicture: URL;
     registration: string;
     preferences?: any;
 };
@@ -37,7 +34,6 @@ type State = {
 export type {
     Time,
     Category,
-    Alert,
     User,
     State
 }
