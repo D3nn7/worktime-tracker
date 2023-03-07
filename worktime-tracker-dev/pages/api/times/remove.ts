@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { IApiResponse } from "../../../lib/types/types";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "DELETE") {

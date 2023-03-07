@@ -8,14 +8,17 @@ import { AppwriteErrorType } from "../../utils/appwrite/appwriteResponse";
 import Header from "./header";
 import Loading from "../Loading";
 import { Toaster, toast } from "sonner";
+import Head from "next/head";
 
 export default function Page({
+    title = "Worktime Tracker",
     isSecurePage = false,
     headerEnabled = true,
     isLoading = false,
     isBlacklistedWhenLoggedIn = false,
     children,
 }: {
+    title?: string;
     isSecurePage?: boolean;
     headerEnabled?: boolean;
     isLoading?: boolean;
@@ -80,6 +83,9 @@ export default function Page({
     } else {
         return (
             <>
+                <Head>
+                    <title>{title}</title>
+                </Head>
                 {headerEnabled && (
                     <Header isUserLoggedIn={user ? true : false} />
                 )}

@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import { mdiPencilCircle, mdiClose } from "@mdi/js";
-import { IAccountCategoryBoxState as props } from "../../lib/types/props";
+import { ITimeCategory } from "../../lib/types/types";
 
 interface Props {
-    editCategoryVaues: props;
-    editCategory: (categoryName: string, categoryType: string) => void;
+    categoryToEdit: ITimeCategory;
+    editCategory: (category: ITimeCategory) => void;
     closePopup: () => void;
 }
 
 export default function EditCategoryPopup(props: Props) {
+    const [isOpen, setIsOpen] = useState(false);
     const [categoryName, setCategoryName] = useState("");
     const [categoryDescription, setCategoryDescription] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        if (props.editCategoryVaues !== undefined) {
-            setCategoryName(props.editCategoryVaues.category);
-            setCategoryDescription(props.editCategoryVaues.description);
-        }
-    }, [props.editCategory]);
+        setCategoryName(props.categoryToEdit.name);
+        setCategoryDescription(props.categoryToEdit.description!);
+    }, [props.categoryToEdit]);
 
     const handleChangeCategoryName = (event: any) => {
         if (event.target.value.length !== null) {
@@ -35,7 +33,11 @@ export default function EditCategoryPopup(props: Props) {
 
     const handleEditCategory = () => {
         if (categoryName.length > 0 && categoryDescription.length > 0) {
-            props.editCategory(categoryName, categoryDescription);
+            props.editCategory({
+                ...props.categoryToEdit,
+                name: categoryName,
+                description: categoryDescription,
+            } as ITimeCategory);
             setIsOpen(false);
             setTimeout(() => {
                 props.closePopup();

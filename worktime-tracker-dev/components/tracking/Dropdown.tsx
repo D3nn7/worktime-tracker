@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IDropdownProps as Props } from "../../lib/types/props";
+import { ITimeCategory } from "../../lib/types/types";
 
 export default function Dropdown(props: Props) {
     const [selection, setSelection] = useState<string>(props.selection);
@@ -9,8 +10,8 @@ export default function Dropdown(props: Props) {
         dropdown.classList.toggle("hidden");
     };
 
-    const handleSelection = (selection: string) => {
-        setSelection(selection);
+    const handleSelection = (selection: ITimeCategory) => {
+        setSelection(selection.name);
         props.setSelect(selection);
         toggleDropdown();
     };
@@ -49,20 +50,34 @@ export default function Dropdown(props: Props) {
                     className="py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownDefaultButton"
                 >
-                    {props.items.map((item) => {
-                        return (
-                            <li
-                                key={item}
-                                onClick={() => handleSelection(item)}
-                            >
-                                <a
-                                    href="#"
-                                    className="block px-4 py-2 hover:bg-[#404040]"
+                    {props.items.map((item, index) => {
+                        if (item.id === "0") {
+                            return (
+                                <li
+                                        key={item.id as string}
+                                    >
+                                        <span
+                                        className="block px-4 py-2"
+                                    >
+                                        {item.name}
+                                    </span>
+                                </li>
+                            );
+                        } else {
+                            return (
+                                <li
+                                    key={item.id as string}
+                                    onClick={() => handleSelection(item)}
                                 >
-                                    {item}
-                                </a>
-                            </li>
-                        );
+                                    <a
+                                        href="#"
+                                        className="block px-4 py-2 hover:bg-[#404040]"
+                                    >
+                                        {item.name}
+                                    </a>
+                                </li>
+                            );
+                        }
                     })}
                 </ul>
             </div>

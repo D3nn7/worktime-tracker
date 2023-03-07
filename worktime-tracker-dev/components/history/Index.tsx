@@ -1,8 +1,12 @@
 import HistoryBox from "../../components/history/HistoryBox";
 import NoEntryBox from "../../components/NoEntryBox";
 import { IHistoryBoxProps } from "../../lib/types/props";
+import { ITime } from "../../lib/types/types";
 
-export default function HistoryIndex(props: { histories: IHistoryBoxProps[] }) {
+export default function HistoryIndex(props: { histories: ITime[] }) {
+
+    const TimeFormat = require('hh-mm-ss')
+
     return (
         <div className="container mx-auto pt-40 pb-20 ">
             <div className="text-3xl ">History</div>
@@ -10,11 +14,11 @@ export default function HistoryIndex(props: { histories: IHistoryBoxProps[] }) {
                 {props.histories.map((history, index) => {
                     return (
                         <HistoryBox
-                            key={index}
-                            category={history.category}
-                            description={history.description}
-                            timeSum={history.timeSum}
-                            duration={history.duration}
+                            key={history.id}
+                            category={history.categoryId as string}
+                            description={history.name}
+                            timeSum={TimeFormat.fromMs(history.calculatedTimeInMs, 'hh:mm:ss')}
+                            duration={history.startDate + " - " + history.endDate}
                         />
                     );
                 })}

@@ -26,7 +26,7 @@ export interface ITime {
     startDate: string;
     endDate?: string;
     breakIds?: string[];
-    calculatedTimeInMinutes: number;
+    calculatedTimeInMs: number;
     categoryId?: string;
 }
 
@@ -37,9 +37,10 @@ export interface ITimeBreaks {
 }
 
 export interface ITimeCategory {
-    id: string;
+    id?: string;
     ownerId: string;
     name: string;
     color: string;
+    description?: string;
     isNotIncludedInTrack: boolean;
 }

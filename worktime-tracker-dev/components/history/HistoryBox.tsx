@@ -29,3 +29,17 @@ export default function HistoryBox(props: Props) {
         </div>
     );
 }
+
+function getReadableTimeFromMinutes(minutes: number) {
+    // get hours minutes and seconds from minues
+    const hours = Math.floor(minutes / 60);
+    const minutesLeft = minutes % 60;
+    const seconds = minutesLeft * 60;
+
+    // format the time
+    const formattedHours = hours.toString().padStart(2, "0");
+    const formattedMinutes = minutesLeft.toString().padStart(2, "0");
+    const formattedSeconds = seconds.toString().padStart(2, "0");
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}

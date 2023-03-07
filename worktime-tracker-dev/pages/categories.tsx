@@ -1,70 +1,130 @@
-import NavBar from "../components/navigation/NavBarTracking";
 import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
 import CategoryBox from "../components/categories/CategoryBox";
 import NoEntryBox from "../components/NoEntryBox";
 import AddCategoryPopup from "../components/categories/AddCategoryPopup";
 import EditCategoryPopup from "../components/categories/EditCategoryPopup";
-import { useState } from "react";
-import { IAccountCategoryBoxState as State } from "../lib/types/props";
+import { useEffect, useState } from "react";
 import Page from "../components/page/page";
-
-interface IEditCategory {
-    index: number;
-    id: string;
-    category: string;
-    description: string;
-}
+import { ITimeCategory } from "../lib/types/types";
+import { getJWT } from "../utils/jwt";
+import { toast } from "sonner";
+import { useRecoilValue } from "recoil";
+import { userState } from "../store/global";
 
 export default function Categories() {
-    const [categories, setCategories] = useState<Array<State>>();
+    const user = useRecoilValue(userState);
+    const [loading, setLoading] = useState(true);
     const [showAddPopup, setShowAddPopup] = useState(false);
     const [showEditPopup, setShowEditPopup] = useState(false);
-    const [editCategory, setEditCategory] = useState<IEditCategory>();
+    const [editCategory, setEditCategory] = useState<ITimeCategory>();
+    const [categories, setCategories] = useState<ITimeCategory[]>([]);
+
+    async function getCategories() {
+        const jwt = await getJWT();
+        const res = await fetch('/api/category/get', {
+            method: 'get',
+            headers: {
+                JWT: jwt
+            },
+        }).then((res) => res.json());
+
+        if (res.status !== 200) {
+            toast.error("Something went wrong", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            setCategories(res.data.documents as ITimeCategory[]);
+            setLoading(false);
+        }
+    }
+
+    async function updateCategory(category: ITimeCategory) {
+        const jwt = await getJWT();
+        const res = await fetch('/api/category/edit', {
+            method: 'post',
+            headers: {
+                JWT: jwt
+            },
+            body: JSON.stringify(category)
+        }).then((res) => res.json());
+
+        if (res.status !== 200) {
+            toast.error("An error occured by updating the category", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            toast.success("Category successfully updated");
+            getCategories();
+        }
+    }
+
+    async function deleteCategory(category: ITimeCategory) {
+        const jwt = await getJWT();
+        const res = await fetch('/api/category/remove', {
+            method: 'delete',
+            headers: {
+                JWT: jwt
+            },
+            body: JSON.stringify(category)
+        });
+        
+        if (res.status !== 204) {
+            toast.error("An error occured by deleting the category", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            toast.success("Category successfully deleted");
+            getCategories();
+        }
+    }
+
+
+    useEffect(() => {
+        getCategories();
+    }, []);
 
     const handleAddCategory = () => {
         setShowAddPopup(true);
     };
 
-    const handleEditCategory = (category: IEditCategory) => {
-        setShowEditPopup(true);
+    const handleEditCategory = (category: ITimeCategory) => {
         setEditCategory(category);
+        setShowEditPopup(true);
     };
 
-    const addCategory = (categoryName: string, categoryType: string) => {
-        if (categories === undefined) {
-            setCategories([
-                {
-                    id: "1",
-                    category: categoryName,
-                    description: categoryType,
-                },
-            ]);
-        } else {
-            categories?.push({
-                id: (categories === undefined
-                    ? 1
-                    : categories.length + 1
-                ).toString(),
-                category: categoryName,
-                description: categoryType,
+    const addCategory = async (categoryName: string, description: string) => {
+        const jwt = await getJWT();
+        const res = await fetch('/api/category/add', {
+            method: 'post',
+            headers: {
+                JWT: jwt,
+            },
+            body: JSON.stringify({
+                name: categoryName,
+                description: description,
+                ownerId: user.$id,
+                isNotIncludedInTrack: false,
+                color: "eff8ff"
+            } as ITimeCategory)
+        }).then((res) => res.json());
+
+        if (res.status !== 200) {
+            toast.error("Something went wrong", {
+                description: `${res.status} ${res.statusText}`
             });
+        } else {
+            toast.success("Category successfully added");
+            getCategories();
         }
     };
 
-    const addEditedCategory = (categoryName: string, categoryType: string) => {
-        if (editCategory !== undefined) {
-            categories![editCategory.index] = {
-                id: editCategory.id,
-                category: categoryName,
-                description: categoryType,
-            };
-            setCategories([...categories!]);
-        }
+    const addEditedCategory = (category: ITimeCategory) => {
+        updateCategory(category);
     };
 
     return (
-        <Page isSecurePage>
+        <Page isSecurePage isLoading={loading}>
             <div className="container mx-auto pt-40 pb-20">
                 <div className="pb-20 ">
                     <div className="text-3xl float-left">Categories</div>
@@ -86,28 +146,22 @@ export default function Categories() {
                     {categories !== undefined
                         ? categories.map((category, index) => (
                               <CategoryBox
-                                  key={index}
-                                  id={category.id}
-                                  category={category.category}
-                                  description={category.description}
+                                  key={category.id}
+                                  id={category.id as string}
+                                  category={category.name}
+                                  description={category.description as string}
                                   handleDelete={() => {
-                                      categories.splice(index, 1);
-                                      setCategories([...categories]);
+                                    deleteCategory(category);
                                   }}
                                   handleEdit={() => {
-                                      handleEditCategory({
-                                          index: index,
-                                          id: category.id,
-                                          category: category.category,
-                                          description: category.description,
-                                      });
+                                      handleEditCategory(category);
                                   }}
                               />
                           ))
                         : null}
                     <NoEntryBox
                         category="Something missing?"
-                        description="add more categories to manage the tiimes more accurately"
+                        description="Add more categories to manage the tiimes more accurately"
                     />
                 </div>
             </div>
@@ -120,7 +174,7 @@ export default function Categories() {
             {showEditPopup && (
                 <EditCategoryPopup
                     closePopup={() => setShowEditPopup(false)}
-                    editCategoryVaues={editCategory!}
+                    categoryToEdit={editCategory as ITimeCategory}
                     editCategory={addEditedCategory}
                 />
             )}

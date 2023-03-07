@@ -1,3 +1,5 @@
+import { ITime, ITimeCategory } from "./types";
+
 export interface ITimeBoxProps {
     average: string;
     time: string;
@@ -20,11 +22,6 @@ export interface IAccountCategoryBoxProps {
     handleEdit: (id: string) => void;
 }
 
-export interface IAccountCategoryBoxState {
-    id: string;
-    category: string;
-    description: string;
-}
 export interface IAccountNoCategoryBoxProps {
     category: string;
     description: string;
@@ -44,16 +41,16 @@ export interface IFeatureProps {
 export interface IHistoryBoxProps {
     description: string;
     category: string;
-    timeSum: string;
+    timeSum: number;
     duration: string;
 }
 
 export interface IHistoryListProps {
-    histories: IHistoryBoxProps[];
+    histories: ITime[];
 }
 
 export interface IDropdownProps {
-    items: string[];
+    items: ITimeCategory[];
     selection: string;
-    setSelect: (item: string) => void;
+    setSelect: (item: ITimeCategory) => void;
 }
