@@ -5,10 +5,22 @@ import { getJWT } from "../../utils/jwt";
 import NoEntryBox from "../NoEntryBox";
 import HistoryBox from "./HistoryBox";
 
-export default function HistoryList() {
+interface Props {
+    stopTracking: boolean,
+    refreshStopTracking: () => void;
+}
+
+export default function HistoryList(props: Props) {
     const [history, setHistory] = useState<ITime[]>([]);
 
-    async function times() {
+    useEffect(() => {
+        if (props.stopTracking === true) {
+            getAllTimes()
+            props.refreshStopTracking()
+        }
+    })
+
+    async function getAllTimes() {
         const jwt = await getJWT();
         const res = await fetch('/api/times/get', {
             method: 'get',
@@ -27,7 +39,7 @@ export default function HistoryList() {
     }
 
     useEffect(() => {
-        times();
+        getAllTimes();
     }, []);
 
     const TimeFormat = require('hh-mm-ss')

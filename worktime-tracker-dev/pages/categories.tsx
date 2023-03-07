@@ -12,21 +12,12 @@ import { toast } from "sonner";
 import { useRecoilValue } from "recoil";
 import { userState } from "../store/global";
 
-
-interface IEditCategory {
-    index: number;
-    id: string;
-    category: string;
-    description: string;
-}
-
 export default function Categories() {
     const user = useRecoilValue(userState);
     const [loading, setLoading] = useState(true);
     const [showAddPopup, setShowAddPopup] = useState(false);
     const [showEditPopup, setShowEditPopup] = useState(false);
-    const [editCategory, setEditCategory] = useState<IEditCategory>();
-
+    const [editCategory, setEditCategory] = useState<ITimeCategory>();
     const [categories, setCategories] = useState<ITimeCategory[]>([]);
 
     async function getCategories() {
@@ -48,6 +39,47 @@ export default function Categories() {
         }
     }
 
+    async function updateCategory(category: ITimeCategory) {
+        const jwt = await getJWT();
+        const res = await fetch('/api/category/edit', {
+            method: 'post',
+            headers: {
+                JWT: jwt
+            },
+            body: JSON.stringify(category)
+        }).then((res) => res.json());
+
+        if (res.status !== 200) {
+            toast.error("An error occured by updating the category", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            toast.success("Category successfully updated");
+            getCategories();
+        }
+    }
+
+    async function deleteCategory(category: ITimeCategory) {
+        const jwt = await getJWT();
+        const res = await fetch('/api/category/remove', {
+            method: 'delete',
+            headers: {
+                JWT: jwt
+            },
+            body: JSON.stringify(category)
+        });
+        
+        if (res.status !== 204) {
+            toast.error("An error occured by deleting the category", {
+                description: `${res.status} ${res.statusText}`
+            });
+        } else {
+            toast.success("Category successfully deleted");
+            getCategories();
+        }
+    }
+
+
     useEffect(() => {
         getCategories();
     }, []);
@@ -56,9 +88,9 @@ export default function Categories() {
         setShowAddPopup(true);
     };
 
-    const handleEditCategory = (category: IEditCategory) => {
-        setShowEditPopup(true);
+    const handleEditCategory = (category: ITimeCategory) => {
         setEditCategory(category);
+        setShowEditPopup(true);
     };
 
     const addCategory = async (categoryName: string, description: string) => {
@@ -87,18 +119,8 @@ export default function Categories() {
         }
     };
 
-    const addEditedCategory = (categoryName: string, description: string) => {
-        if (editCategory !== undefined) {
-            categories![editCategory.index] = {
-                id: editCategory.id,
-                name: categoryName,
-                description: description,
-                ownerId: user.$id,
-                isNotIncludedInTrack: false,
-                color: "eff8ff"
-            };
-            setCategories([...categories!]);
-        }
+    const addEditedCategory = (category: ITimeCategory) => {
+        updateCategory(category);
     };
 
     return (
@@ -129,16 +151,10 @@ export default function Categories() {
                                   category={category.name}
                                   description={category.description as string}
                                   handleDelete={() => {
-                                      categories.splice(index, 1);
-                                      setCategories([...categories]);
+                                    deleteCategory(category);
                                   }}
                                   handleEdit={() => {
-                                      handleEditCategory({
-                                          index: index,
-                                          id: category.id as string,
-                                          category: category.name,
-                                          description: category.description as string,
-                                      });
+                                      handleEditCategory(category);
                                   }}
                               />
                           ))
@@ -158,7 +174,7 @@ export default function Categories() {
             {showEditPopup && (
                 <EditCategoryPopup
                     closePopup={() => setShowEditPopup(false)}
-                    editCategoryVaues={editCategory!}
+                    categoryToEdit={editCategory as ITimeCategory}
                     editCategory={addEditedCategory}
                 />
             )}
