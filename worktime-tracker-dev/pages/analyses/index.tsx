@@ -1,9 +1,9 @@
-import NavBar from "../../components/navigation/NavBarTracking";
 import TimeBox from "../../components/analyses/TimeBox";
 import CategoryBox from "../../components/analyses/CategoryBox";
 import Page from "../../components/page/page";
 
 export default function Analyses() {
+    
     return (
         <Page isSecurePage>
             <div className="container mx-auto pt-40">
