@@ -1,3 +1,6 @@
+> ⚠️ **Important Notice**: This project was finished as a school project and will be developed and published by [Slynite](https://github.com/Slynite/worktime-tracker) from now on.
+
+
 <p align="center">
     <img src="./assets/images/worktime_tracker_logo_v2.png">
 </p>
